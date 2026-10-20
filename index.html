@@ -1,0 +1,1441 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<title>Indy Pass from NYC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column of tier sections under a sticky trail-sign bar (jump links + filters). */
+:root {
+  --bg: #f3f6f8;        /* packed snow, cool */
+  --surface: #ffffff;
+  --ink: #142230;       /* spruce-navy */
+  --muted: #5a6a78;
+  --line: #d9e1e7;
+  --accent: #1d5c8f;    /* glacier blue */
+  --accent-soft: #e2edf6;
+  --go: #146b47;        /* transit green */
+  --go-soft: #dff1e7;
+  --warn: #8a5a00;
+  --warn-soft: #fbf0d9;
+  --feature: #142230;
+  --feature-ink: #f3f6f8;
+  --feature-muted: #b7c6d3;
+  --bar: color-mix(in srgb, #f3f6f8 90%, transparent);
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f161d; --surface: #17212b; --ink: #e6edf2; --muted: #93a3b1; --line: #26333f;
+    --accent: #7db6e8; --accent-soft: #1a2c3d; --go: #6fd1a2; --go-soft: #15302a;
+    --warn: #f0c26b; --warn-soft: #33290f;
+    --feature: #1f3a55; --feature-ink: #f3f6f8; --feature-muted: #b7c6d3;
+    --bar: color-mix(in srgb, #0f161d 88%, transparent); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f161d; --surface: #17212b; --ink: #e6edf2; --muted: #93a3b1; --line: #26333f;
+  --accent: #7db6e8; --accent-soft: #1a2c3d; --go: #6fd1a2; --go-soft: #15302a;
+  --warn: #f0c26b; --warn-soft: #33290f;
+  --feature: #1f3a55; --feature-ink: #f3f6f8; --feature-muted: #b7c6d3;
+  --bar: color-mix(in srgb, #0f161d 88%, transparent); color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+header.wrap { padding-block: 28px 14px; }
+.eyebrow {
+  font: 500 0.72rem/1 var(--font-data);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 8px;
+}
+h1 {
+  font: 700 clamp(2.2rem, 9vw, 3rem)/0.95 var(--font-display);
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
+.sub { margin: 8px 0 0; color: var(--muted); max-width: 52ch; }
+
+/* Sticky bar */
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bar);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.jump {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-block: 10px 6px;
+}
+.jump::-webkit-scrollbar { display: none; }
+.jump a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  font: 600 0.82rem/1.2 var(--font-body);
+  white-space: nowrap;
+}
+.jump a:focus-visible, .card summary:focus-visible, .filters input:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.jump .n { font: 500 0.72rem/1 var(--font-data); color: var(--muted); }
+.jump a.empty { opacity: 0.45; }
+
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding-block: 2px 10px; font-size: 0.85rem; color: var(--muted); }
+.controls .range { flex: 1 1 130px; display: grid; gap: 2px; min-width: 0; }
+.controls output { font: 500 0.85rem/1 var(--font-data); color: var(--ink); margin-left: 6px; }
+.controls input[type="range"] { width: 100%; margin: 0; accent-color: var(--accent); }
+.pill { flex: none; cursor: pointer; }
+.pill input { position: absolute; opacity: 0; pointer-events: none; }
+.pill span { display: block; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; white-space: nowrap; }
+.pill input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.pill input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.extras { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; }
+.extra { font: 600 0.74rem/1 var(--font-body); padding: 5px 9px; border-radius: 999px; background: var(--warn-soft); color: var(--ink); }
+.card.feature .extra { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
+.extras-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.time .fly { display: block; font-size: 0.72rem; color: var(--muted); }
+.card.feature .time .fly { color: var(--feature-muted); }
+.extra.night { background: var(--accent-soft); color: var(--accent); }
+.card.feature .extra.night { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
+.beer { margin-left: 6px; font-size: 0.95rem; letter-spacing: 1px; }
+.tabs { display: flex; flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
+.tabs button {
+  flex: 1; min-width: 0; border: 0; background: transparent; color: var(--muted);
+  font: 600 0.8rem/1 var(--font-body); padding: 7px 4px; border-radius: 999px; cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--bg); }
+.ftoggle {
+  flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+  font: 600 0.8rem/1 var(--font-body); padding: 8px 12px; border-radius: 999px; cursor: pointer;
+}
+.ftoggle[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.ftoggle span:not(:empty) { margin-left: 6px; background: var(--accent); color: var(--bg); border-radius: 999px; padding: 1px 6px; font-size: 0.7rem; }
+.tabs button:focus-visible, .ftoggle:focus-visible, .seg input:focus-visible + span, .check input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.filters { display: grid; gap: 12px; padding-block: 2px 14px; font-size: 0.85rem; color: var(--muted); }
+.filters .range { display: grid; gap: 4px; min-width: 0; }
+.filters output { font: 500 0.85rem/1 var(--font-data); color: var(--ink); margin-left: 6px; }
+.filters input[type="range"] { width: 100%; margin: 0; accent-color: var(--accent); }
+.filters .row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg span { display: block; padding: 6px 10px; border-radius: 999px; cursor: pointer; font-weight: 600; color: var(--muted); }
+.seg input:checked + span { background: var(--accent-soft); color: var(--accent); }
+.check { display: flex; align-items: center; gap: 7px; color: var(--ink); cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
+.score { font: 500 0.72rem/1 var(--font-data); padding: 4px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); white-space: nowrap; }
+.score i { font-style: normal; color: var(--muted); margin-right: 4px; }
+.card.feature .score { border-color: color-mix(in srgb, var(--feature-ink) 30%, transparent); color: var(--feature-ink); }
+.card.feature .score i { color: var(--feature-muted); }
+.bars { display: inline-flex; gap: 2px; vertical-align: middle; margin-left: 6px; }
+.bars b { width: 10px; height: 6px; border-radius: 2px; background: var(--line); }
+.bars b.on { background: var(--accent); }
+.card.feature .bars b { background: color-mix(in srgb, var(--feature-ink) 20%, transparent); }
+.card.feature .bars b.on { background: var(--feature-ink); }
+.apres-grid { display: grid; gap: 4px; }
+.filters .cf { display: flex; align-items: center; gap: 7px; white-space: nowrap; cursor: pointer; color: var(--ink); }
+.filters input[type="checkbox"] { width: 18px; height: 18px; margin: 0; accent-color: var(--go); }
+
+/* Tiers */
+main.wrap { padding-block: 4px 8px; display: grid; gap: 4px; }
+.tier { padding-top: 26px; scroll-margin-top: 120px; }
+.tier h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font: 700 1.35rem/1 var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+.tier h2 .n { font: 500 0.72rem/1 var(--font-data); color: var(--muted); letter-spacing: 0.04em; }
+.tier .blurb { margin: 4px 0 0; color: var(--muted); font-size: 0.88rem; }
+.trip { padding-top: 14px; }
+.trip h3 { font: 700 1.05rem/1.2 var(--font-display); text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent); margin: 0; }
+.cards { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 8px; }
+
+/* Card */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.card summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 13px 15px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 12px;
+  border-radius: var(--radius);
+}
+.card summary::-webkit-details-marker { display: none; }
+.name { font-weight: 600; font-size: 1.05rem; min-width: 0; }
+.state { font: 500 0.72rem/1 var(--font-data); color: var(--muted); margin-left: 7px; letter-spacing: 0.04em; }
+.time { font: 500 0.95rem/1.5 var(--font-data); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.time small { color: var(--muted); font-size: 0.7rem; margin-left: 3px; }
+.note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 0.92rem; }
+.meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 22px; }
+.badge {
+  font: 600 0.72rem/1 var(--font-body);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--go-soft);
+  color: var(--go);
+}
+.badge.res { background: var(--warn-soft); color: var(--warn); }
+.badge.nores { background: var(--accent-soft); color: var(--accent); }
+.rank { font: 500 0.78rem/1 var(--font-data); color: var(--muted); margin-right: 8px; font-variant-numeric: tabular-nums; }
+.card.feature .rank { color: var(--feature-muted); }
+.chev { margin-left: auto; color: var(--muted); font-size: 0.75rem; transition: transform 0.15s; }
+.card[open] .chev { transform: rotate(180deg); }
+
+.details {
+  margin: 0 15px;
+  padding-block: 12px 14px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 7px 16px;
+  font-size: 0.9rem;
+}
+.details dt { color: var(--muted); font: 500 0.72rem/1.9 var(--font-data); text-transform: uppercase; letter-spacing: 0.06em; }
+.details dd { margin: 0; min-width: 0; }
+.details .num { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.details a { color: var(--accent); overflow-wrap: anywhere; }
+.details .warn { color: var(--warn); }
+
+/* Featured card (Jay Peak) */
+.card.feature { background: var(--feature); border-color: var(--feature); color: var(--feature-ink); }
+.card.feature summary { padding: 18px 18px 14px; }
+.card.feature .kicker {
+  grid-column: 1 / -1;
+  font: 500 0.7rem/1 var(--font-data);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--feature-muted);
+}
+.card.feature .name { font: 700 2rem/1 var(--font-display); text-transform: uppercase; }
+.card.feature .state, .card.feature .time small, .card.feature .chev { color: var(--feature-muted); }
+.card.feature .note { color: var(--feature-ink); font-size: 0.98rem; }
+.card.feature .stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 6px 0 2px;
+}
+.card.feature .stat b { display: block; font: 700 1.7rem/1 var(--font-display); }
+.card.feature .stat span { font: 500 0.68rem/1.3 var(--font-data); text-transform: uppercase; letter-spacing: 0.06em; color: var(--feature-muted); }
+.card.feature .badge { background: color-mix(in srgb, var(--feature-ink) 16%, transparent); color: var(--feature-ink); }
+.card.feature .details { border-top-color: color-mix(in srgb, var(--feature-ink) 20%, transparent); margin: 0 18px; }
+.card.feature .details dt { color: var(--feature-muted); }
+.card.feature .details a { color: var(--feature-ink); }
+.card.feature .badge.res { background: var(--warn-soft); color: var(--warn); }
+.apres { grid-column: 1 / -1; margin: 2px 0 0; font-size: 0.88rem; padding: 8px 10px; border-radius: 8px; background: var(--accent-soft); color: var(--ink); }
+.apres b { font: 500 0.68rem/1 var(--font-data); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-right: 6px; }
+.card.feature .apres { background: color-mix(in srgb, var(--feature-ink) 12%, transparent); color: var(--feature-ink); }
+.card.feature .apres b { color: var(--feature-muted); }
+.highlights { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; }
+
+.none { color: var(--muted); text-align: center; padding-block: 40px; margin: 0; }
+footer.wrap { padding-block: 36px 40px; color: var(--muted); font-size: 0.78rem; }
+footer p { margin: 0 0 6px; max-width: 60ch; }
+</style>
+
+<header class="wrap">
+  <p class="eyebrow">2026/27 season · from Manhattan</p>
+  <h1>Indy Pass from NYC</h1>
+  <p class="sub">My tiered picks: drive-to hills first, then short flights, out west, and trip ideas for Europe and Japan. Ranked within each tier, with the lifts and après worth knowing about: 🍺 is good après, 🍺🍺 is great, and ✨ marks extras like spas, onsen and the Northern Lights. Tap a resort for vertical, trip length and the website.</p>
+</header>
+
+<nav class="bar" aria-label="Tiers and filters">
+  <div class="wrap">
+    <div class="jump" id="jump"></div>
+    <div class="controls" id="filters">
+        <label class="pill" for="good-apres"><input type="checkbox" id="good-apres"><span>🍺 Après</span></label>
+        <label class="pill" for="has-extras"><input type="checkbox" id="has-extras"><span>✨ Extras</span></label>
+          <label class="pill" for="domestic"><input type="checkbox" id="domestic"><span>US &amp; Canada</span></label>
+        <label class="range" for="max-drive">
+          <span>Max drive<output id="drive-out" for="max-drive">Any</output></span>
+          <input type="range" id="max-drive" min="15" max="300" step="15" value="300">
+        </label>
+        <label class="range" for="max-flight">
+          <span>Max flight<output id="flight-out" for="max-flight">Any</output></span>
+          <input type="range" id="max-flight" min="0" max="1020" step="30" value="1020">
+        </label>
+      </div>
+  </div>
+</nav>
+
+<main class="wrap" id="tiers" aria-live="polite"></main>
+<p class="none wrap" id="none" hidden>No resorts match. Try a longer drive.</p>
+
+<footer class="wrap">
+  <p>🍺 means good après and 🍺🍺 means great après. Those are my own calls.</p>
+  <p>Every resort here has a current page on indyskipass.com. Vertical, snowfall and reservation rules come from those pages, checked October 2026. Flight times are approximate scheduled times from JFK, LaGuardia or Newark, nonstop where one exists. Drive times are rough no-traffic estimates: from Midtown for the drive-to tiers, and from the airport or train station for everything else.</p>
+  <p>Where a reservation is required, book it on the Indy Pass site before you drive up.</p>
+</footer>
+
+<script type="application/json" id="resort-data">
+[
+  {
+    "name": "Catamount",
+    "state": "NY / MA",
+    "tier": "Within 2 hours",
+    "my_note": "Straddles the New York–Massachusetts line, so you can ski across a state border before lunch. The closest Berkshires hill to the city.",
+    "drive_time_from_manhattan": 135,
+    "day_trip_or_weekend": "Day trip",
+    "vertical_ft": 1000,
+    "reservations_required": true,
+    "website": "https://www.catamountski.com",
+    "rank": 1,
+    "night_skiing": true
+  },
+  {
+    "name": "Montage Mountain",
+    "state": "PA",
+    "tier": "Within 2 hours",
+    "my_note": "Scranton, home of Dunder Mifflin. Bills itself as Pennsylvania's steepest, and 100% of it is lit for night skiing.",
+    "drive_time_from_manhattan": 125,
+    "day_trip_or_weekend": "Day trip",
+    "vertical_ft": 1000,
+    "website": "https://www.montagemountainresorts.com/",
+    "rank": 2,
+    "reservations_required": false,
+    "apres": "Fire pits at Midland, the outdoor spot near the top of the Phoebe Snow lift, with drinks and waffles between runs.",
+    "apres_level": 1,
+    "night_skiing": true
+  },
+  {
+    "name": "Shawnee Mountain",
+    "state": "PA",
+    "tier": "Within 2 hours",
+    "my_note": "The closest Indy day trip to Manhattan, about 1h35 to the Poconos. Small, well groomed and lit for night skiing.",
+    "drive_time_from_manhattan": 95,
+    "day_trip_or_weekend": "Day trip",
+    "vertical_ft": 700,
+    "website": "https://www.shawneemt.com/",
+    "rank": 3,
+    "reservations_required": false,
+    "night_skiing": true
+  },
+  {
+    "name": "Magic Mountain",
+    "state": "VT",
+    "tier": "Within 4 hours",
+    "my_note": "Big powder and narrow, winding Vermont trails, with some of the best glades in the south of the state. Old-school Vermont vibes: independent, anti-corporate soul skiing. Its founder helped bring après to America, and the Black Line Tavern keeps that going.",
+    "drive_time_from_manhattan": 240,
+    "day_trip_or_weekend": "Weekend",
+    "vertical_ft": 1500,
+    "reservations_required": true,
+    "website": "https://www.magicmtn.com",
+    "rank": 1,
+    "featured": true,
+    "stats": [
+      {
+        "value": "1,500′",
+        "label": "vertical"
+      },
+      {
+        "value": "50",
+        "label": "official runs"
+      },
+      {
+        "value": "205",
+        "label": "acres"
+      }
+    ],
+    "highlights": [
+      "Expert lines like Redline and Black Magic, with pitches of 40° and steeper",
+      "Some of the most extensive glade skiing in southern Vermont",
+      "The Red Chair, a 1970 double chair to the 2,850 ft summit, plus a newer quad that tripled capacity to the top",
+      "A laid-back, local crowd and short lift lines: big-mountain terrain with a small-ski-area feel",
+      "Book your Indy reservation before you go"
+    ],
+    "apres": "The Black Line Tavern, upstairs in the base lodge. Magic founder Hans Thorner helped bring après culture to American skiing, and the BLT still has live music and a crowd two deep at the bar on weekends.",
+    "apres_level": 2
+  },
+  {
+    "name": "Berkshire East",
+    "state": "MA",
+    "tier": "Within 4 hours",
+    "my_note": "The biggest vertical in Massachusetts, with a mountain coaster and a live-music bar at the bottom.",
+    "drive_time_from_manhattan": 210,
+    "day_trip_or_weekend": "Weekend",
+    "vertical_ft": 1180,
+    "reservations_required": true,
+    "website": "https://berkshireeast.com",
+    "rank": 2,
+    "apres": "The Crazy Horse bar, with live music and a deck, plus a fire pit with Adirondack chairs facing the slopes.",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "🎢",
+        "label": "Mountain coaster",
+        "text": "A mountain coaster at the base."
+      }
+    ],
+    "night_skiing": true
+  },
+  {
+    "name": "Greek Peak",
+    "state": "NY",
+    "tier": "Within 4 hours",
+    "my_note": "A real resort in the Finger Lakes. Stay on site at Hope Lake Lodge, ski glades that are easy to learn on, and finish in the spa or the waterpark.",
+    "drive_time_from_manhattan": 220,
+    "day_trip_or_weekend": "Weekend",
+    "vertical_ft": 952,
+    "reservations_required": true,
+    "website": "https://www.greekpeak.net/",
+    "rank": 3,
+    "apres": "Cascades, the indoor waterpark at Hope Lake Lodge (for lodge guests), and Trax Pub upstairs in the main lodge.",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "🧖",
+        "label": "Spa",
+        "text": "Waterfalls Spa at Hope Lake Lodge, a 5,500 sq ft spa."
+      },
+      {
+        "icon": "🌊",
+        "label": "Waterpark",
+        "text": "Cascades, a 41,000 sq ft indoor waterpark with a wave pool and outdoor hot tubs (lodge guests)."
+      }
+    ],
+    "night_skiing": true
+  },
+  {
+    "name": "Ragged Mountain",
+    "state": "NH",
+    "tier": "Within 5 hours",
+    "my_note": "New Hampshire's best-kept secret, by its own account: two peaks, 250 acres, 17 glades and two high-speed lifts.",
+    "drive_time_from_manhattan": 260,
+    "day_trip_or_weekend": "Weekend",
+    "vertical_ft": 1250,
+    "website": "https://www.raggedmountainresort.com/",
+    "rank": 1,
+    "reservations_required": false,
+    "lifts": "Two high-speed lifts: the Summit Six six-pack and the Spear Mountain Express quad.",
+    "trip": "New Hampshire weekend: Ragged + Waterville",
+    "featured": true,
+    "kicker": "The NH headliner",
+    "stats": [
+      {
+        "value": "1,250′",
+        "label": "vertical"
+      },
+      {
+        "value": "250",
+        "label": "acres"
+      },
+      {
+        "value": "17",
+        "label": "glades"
+      }
+    ]
+  },
+  {
+    "name": "Waterville Valley",
+    "state": "NH",
+    "tier": "Within 5 hours",
+    "my_note": "Over 2,000 ft of vertical and New Hampshire's fastest chairlift. Ski down, then walk over to Town Square for darts and axe throwing.",
+    "drive_time_from_manhattan": 290,
+    "day_trip_or_weekend": "Weekend",
+    "vertical_ft": 2020,
+    "website": "https://www.waterville.com/",
+    "rank": 2,
+    "reservations_required": false,
+    "apres": "The Loft in Town Square has darts and axe throwing, and T-Bars is the slopeside pub.",
+    "lifts": "The Tecumseh Express, a bubble-covered six-pack that opened in 2022 as the fastest chairlift in New Hampshire. It climbs 1,585 vertical feet in about five minutes.",
+    "apres_level": 1,
+    "trip": "New Hampshire weekend: Ragged + Waterville",
+    "night_skiing": true
+  },
+  {
+    "name": "Jay Peak",
+    "state": "VT",
+    "tier": "Short flights",
+    "my_note": "347 inches a year, the most in eastern North America, plus a tram to the summit and glades everywhere. This is the reason to fly to Burlington.",
+    "highlights": [
+      "347 in. of average snowfall, the most in eastern North America",
+      "2,153 ft of vertical across 81 trails, slopes and glades",
+      "Glades all over the mountain, and a liberal in-bounds policy: if it's inside the boundary, you can ski it"
+    ],
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 80
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 2153,
+    "website": "https://jaypeakresort.com/",
+    "rank": 1,
+    "reservations_required": false,
+    "featured": true,
+    "stats": [
+      {
+        "value": "347″",
+        "label": "avg snowfall"
+      },
+      {
+        "value": "2,153′",
+        "label": "vertical"
+      },
+      {
+        "value": "81",
+        "label": "official runs"
+      }
+    ],
+    "apres": "The Pump House, a 60,000 sq ft indoor waterpark with The Drink bar above it. The Tower Bar in the Tram Haus Lodge is built from old chairlift towers, and locals head to The Belfry in Montgomery Center.",
+    "lifts": "The aerial tram runs to the summit, and the Flyer is the longest lappable high-speed quad in the Northeast.",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "🌊",
+        "label": "Waterpark",
+        "text": "The Pump House, a 60,000 sq ft indoor waterpark, with a bar above it."
+      }
+    ],
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Bolton Valley",
+    "state": "VT",
+    "tier": "Short flights",
+    "my_note": "35 minutes from the airport, with night skiing and a slopeside tavern that stays busy late.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 35
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 1704,
+    "website": "https://www.boltonvalley.com",
+    "rank": 2,
+    "reservations_required": false,
+    "apres": "The James Moore Tavern, slopeside, with local beer and live music. Night skiing keeps it going late, so book early on busy nights.",
+    "apres_level": 1,
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Smugglers' Notch",
+    "state": "VT",
+    "tier": "Short flights",
+    "my_note": "Three mountains and the biggest vertical in northern Vermont, at 2,610 ft. Indy holders get 20% off midweek lodging, so make it a long weekend.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 50
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 2610,
+    "reservations_required": true,
+    "website": "https://www.smuggs.com/",
+    "rank": 3,
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Burke Mountain",
+    "state": "VT",
+    "tier": "Short flights",
+    "my_note": "Over 2,000 ft of vertical in Vermont's Northeast Kingdom, with two high-speed quads and usually no crowds.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 100
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 2011,
+    "website": "https://www.skiburke.com/",
+    "rank": 4,
+    "reservations_required": false,
+    "lifts": "Two high-speed quads: the Sherburne Express from the base and the Mid-Burke Express above it.",
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Cannon Mountain",
+    "state": "NH",
+    "tier": "Short flights",
+    "my_note": "Steep, icy and legendary in Franconia Notch, with 2,180 ft of vertical and a tram to the summit.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 120
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 2180,
+    "reservations_required": true,
+    "website": "https://www.cannonmt.com/",
+    "rank": 5,
+    "lifts": "An aerial tramway to the summit, plus the Peabody Express high-speed quad.",
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Owl's Head",
+    "state": "QC",
+    "tier": "Short flights",
+    "my_note": "Ski straight toward Lake Memphremagog, just across the Quebec border. Bring your passport.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 80
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 1770,
+    "website": "https://owlshead.com/en/",
+    "rank": 6,
+    "reservations_required": false,
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Mont Sutton",
+    "state": "QC",
+    "tier": "Short flights",
+    "my_note": "Just over the Quebec border and known for its glades. Bring your passport.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BTV",
+      "drive_min": 75
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 1509,
+    "website": "https://montsutton.com/en/",
+    "rank": 7,
+    "reservations_required": false,
+    "flight": {
+      "min": 90,
+      "note": "nonstop from LGA, JFK or EWR"
+    }
+  },
+  {
+    "name": "Loveland",
+    "state": "CO",
+    "tier": "Out west",
+    "my_note": "The Colorado pick: terrain up to 13,010 ft on the Continental Divide, free cat skiing, and about 75 minutes from Denver International.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "DEN",
+      "drive_min": 75
+    },
+    "day_trip_or_weekend": "Long weekend",
+    "vertical_ft": 2210,
+    "website": "https://skiloveland.com/",
+    "rank": 1,
+    "reservations_required": false,
+    "apres": "The Rathskeller in the Basin Lodge, a classic ski bar with daily drink specials. Ptarmigan Roost serves beer on a deck at 12,050 ft.",
+    "lifts": "Chet's Dream, a high-speed quad out of the base, turned an 8-minute ride into a 3-minute one.",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "🚜",
+        "label": "Cat skiing",
+        "text": "Free snowcat skiing along the Continental Divide (Indy holders also get 10% off single-seat cat skiing)."
+      }
+    ],
+    "flight": {
+      "min": 285,
+      "note": "nonstop from all three NYC airports"
+    },
+    "featured": true,
+    "kicker": "The Colorado pick",
+    "stats": [
+      {
+        "value": "2,210′",
+        "label": "vertical"
+      },
+      {
+        "value": "1,800",
+        "label": "acres"
+      },
+      {
+        "value": "13,010′",
+        "label": "summit"
+      }
+    ]
+  },
+  {
+    "name": "Mountain High",
+    "state": "CA",
+    "tier": "Out west",
+    "my_note": "SoCal's closest snow: 90 minutes from downtown LA, an hour from Ontario airport, and night skiing Wednesday to Sunday in peak season.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "ONT",
+      "drive_min": 60,
+      "also": "LAX or BUR about 1h45"
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 1600,
+    "website": "https://www.mthigh.com/",
+    "rank": 2,
+    "reservations_required": false,
+    "lifts": "Two high-speed quads, including the Blue Ridge Express, the most popular lift on the mountain.",
+    "flight": {
+      "min": 375,
+      "note": "JetBlue nonstop from JFK"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Mt. Hood Meadows",
+    "state": "OR",
+    "tier": "Out west",
+    "my_note": "Big-mountain Oregon: 2,150 acres, 430 inches of snow a year and night skiing, about 1h45 from Portland's airport.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "PDX",
+      "drive_min": 105
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 1939,
+    "website": "https://www.skihood.com/",
+    "rank": 3,
+    "reservations_required": false,
+    "lifts": "A new Mt. Hood Express high-speed six-pack (2023–24) and five more high-speed quads.",
+    "flight": {
+      "min": 375,
+      "note": "nonstop"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Tamarack",
+    "state": "ID",
+    "tier": "Out west",
+    "my_note": "2,800 ft of vertical, 1,300+ acres and a 40-tap self-pour beer wall. It's on Ikon too, so bring your Ikon friends.",
+    "highlights": [
+      "2,800 ft of vertical, about 1,385 acres and about 300 in. of snow a year",
+      "On the Ikon Pass for 26/27 as a bonus mountain (2 days on the full Ikon Pass, with some blackout dates), so mixed Indy and Ikon groups can ski together",
+      "Pair it with Brundage, about an hour north near McCall"
+    ],
+    "pass_note": "Check before you go: after Tamarack joined Ikon, Indy said it was in discussions about accepting Indy+ holders for 26/27.",
+    "apres": "Seven Devils Taphouse in the village has a 40-tap self-pour beer wall, and The Reserve was voted best ski restaurant in North America in USA Today's 2023 10Best readers' poll.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BOI",
+      "drive_min": 120
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 2800,
+    "reservations_required": false,
+    "website": "https://tamarackidaho.com/",
+    "rank": 4,
+    "apres_level": 1,
+    "flight": {
+      "min": 450,
+      "note": "one connection, usually via Denver or Salt Lake City"
+    }
+  },
+  {
+    "name": "Brundage",
+    "state": "ID",
+    "tier": "Out west",
+    "my_note": "\"The Best Snow in Idaho,\" by its own count: about 320 inches a year, 1,920 acres and plenty of advanced terrain outside the lake town of McCall.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "BOI",
+      "drive_min": 150
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 1921,
+    "reservations_required": true,
+    "website": "https://brundage.com/",
+    "rank": 5,
+    "extras": [
+      {
+        "icon": "🚜",
+        "label": "Cat skiing",
+        "text": "Cat skiing in the Payette National Forest, 10% off single-seat trips for Indy holders."
+      }
+    ],
+    "flight": {
+      "min": 450,
+      "note": "one connection, usually via Denver or Salt Lake City"
+    }
+  },
+  {
+    "name": "Snow King",
+    "state": "WY",
+    "tier": "Out west",
+    "my_note": "Jackson Hole's original ski area. A gondola goes up from the edge of downtown, and the Million Dollar Cowboy Bar is a walk away.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "JAC",
+      "drive_min": 15
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 1560,
+    "website": "https://snowkingmountain.com/",
+    "rank": 6,
+    "reservations_required": false,
+    "apres": "Walk into downtown Jackson: saddle barstools and live country music at the Million Dollar Cowboy Bar, or the Silver Dollar Bar at the Wort Hotel.",
+    "lifts": "An eight-passenger gondola from downtown Jackson to the summit in about five minutes.",
+    "apres_level": 2,
+    "extras": [
+      {
+        "icon": "🎢",
+        "label": "Mountain coaster",
+        "text": "The Cowboy Coaster runs all winter, plus the only snow tubing in Jackson."
+      }
+    ],
+    "flight": {
+      "min": 300,
+      "note": "United nonstop from Newark in winter"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Bear Valley",
+    "state": "CA",
+    "tier": "Out west",
+    "my_note": "California's sweet spot, as it calls itself: a big Sierra mountain with 1,679 acres and about 288 inches of snow a year.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "SMF",
+      "drive_min": 165,
+      "also": "SFO or OAK about 3h30"
+    },
+    "day_trip_or_weekend": "Trip",
+    "vertical_ft": 1900,
+    "website": "https://www.bearvalley.com/",
+    "rank": 7,
+    "reservations_required": false,
+    "flight": {
+      "min": 390,
+      "note": "JetBlue nonstop from JFK"
+    }
+  },
+  {
+    "name": "Innsbruck SKI plus CITY",
+    "state": "Austria",
+    "tier": "Europe",
+    "trip": "Austria: Innsbruck + SkiWelt",
+    "rank": 1,
+    "featured": true,
+    "my_note": "An Olympic city with 12 ski areas on one pass. Take the funicular from the Old Town up to Nordkette, ski the Stubai Glacier the next day, and be back downtown for dinner.",
+    "stats": [
+      {
+        "value": "12",
+        "label": "ski areas"
+      },
+      {
+        "value": "265 km",
+        "label": "of slopes"
+      },
+      {
+        "value": "Oct–May",
+        "label": "season"
+      }
+    ],
+    "highlights": [
+      "Nordkette, right in town: the Hungerburg funicular leaves from the Old Town and climbs in about 8 minutes, then cable cars run to Seegrube (1,905 m) and Hafelekar (2,256 m). Its steep Karrinne run is for experts only.",
+      "The Stubai Glacier, Axamer Lizum, Patscherkofel, Kühtai, Glungezer and Hochoetz are all on the same pass",
+      "Want more glacier? Pitztal (the highest skiing in Tyrol, at 3,440 m) and Kaunertal are also on the Indy Pass, about 1h20 to 1h40 from Innsbruck.",
+      "Indy covers 2 consecutive days on the SKI plus CITY Pass. Redeem it at the Innsbruck Tourist Office (Burggraben 3) or another resort's ticket window, not at Nordkette."
+    ],
+    "lifts": "The Hungerburg funicular and the Nordkette cable cars take you from the city center to 2,256 m without a car.",
+    "apres": "You're in a city: walk back into the Old Town for dinner and beer halls instead of driving down a valley.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "MUC",
+      "drive_min": 120,
+      "also": "or about 1h from the SkiWelt; Innsbruck airport (INN) is 15 min away if you connect"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 5282,
+    "reservations_required": false,
+    "website": "https://www.innsbruck.info/en/skiing/ski-plus-city-pass.html",
+    "apres_level": 2,
+    "flight": {
+      "min": 465,
+      "note": "nonstop from JFK or Newark"
+    }
+  },
+  {
+    "name": "SkiWelt Wilder Kaiser–Brixental",
+    "state": "Austria",
+    "tier": "Europe",
+    "trip": "Austria: Innsbruck + SkiWelt",
+    "rank": 2,
+    "my_note": "270+ km of runs, 82 lifts and about 80 mountain huts. You'll run out of days before you run out of runs, or places for lunch.",
+    "lifts": "82 modern lifts from nine entry points, so you can start in any village and ski the whole area.",
+    "apres": "Lunch is the main event: about 80 huts, from rustic farmhouse kitchens to the revolving terrace on the Hohe Salve.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "MUC",
+      "drive_min": 75,
+      "also": "the first stop on the way from Munich to Innsbruck"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 4098,
+    "reservations_required": false,
+    "website": "https://www.skiwelt.at/",
+    "featured": true,
+    "kicker": "Huge, and the food",
+    "stats": [
+      {
+        "value": "270+ km",
+        "label": "of runs"
+      },
+      {
+        "value": "82",
+        "label": "lifts"
+      },
+      {
+        "value": "~80",
+        "label": "mountain huts"
+      }
+    ],
+    "highlights": [
+      "Gipfelalm Hohe Salve: the summit hut has Austria's first revolving panoramic terrace, with views of 70 peaks over 3,000 m. Order the Tiroler Gröstl.",
+      "Rübezahl-Alm in Ellmau: a family-run hut from 1778 with a big terrace facing the Wilder Kaiser. Go for the schnitzel and Kaiserschmarrn.",
+      "Hexenalm in Söll: pizza fresh from the oven.",
+      "Jochstubn in Scheffau: hearty Tyrolean food in big portions, where three lifts meet.",
+      "KRAFTalm in Itter: Tyrolean dishes made from local products, with a panorama spa.",
+      "Nine villages link into one area: Söll, Ellmau, Scheffau, Going, Itter, Hopfgarten, Brixen, Westendorf and Kelchsau"
+    ],
+    "apres_level": 2,
+    "extras": [
+      {
+        "icon": "🧖",
+        "label": "Spa",
+        "text": "The KRAFTalm in Itter has a panorama spa on the mountain, and plenty of hotels in the valley villages have saunas, steam rooms and pools."
+      }
+    ],
+    "flight": {
+      "min": 465,
+      "note": "nonstop from JFK or Newark"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Portes du Soleil",
+    "state": "France / Switzerland",
+    "tier": "Europe",
+    "trip": "The French Alps",
+    "rank": 1,
+    "my_note": "Two countries, 12 resorts and 600 km of pistes, so you can ski from France into Switzerland and back. Indy gives 2 days total across the whole area.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "GVA",
+      "drive_min": 75
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 5118,
+    "reservations_required": false,
+    "website": "https://en.portesdusoleil.com/",
+    "apres_level": 2,
+    "flight": {
+      "min": 455,
+      "note": "nonstop from JFK"
+    }
+  },
+  {
+    "name": "Les Contamines",
+    "state": "France",
+    "tier": "Europe",
+    "trip": "The French Alps",
+    "rank": 2,
+    "my_note": "Mont Blanc views, 120 km of slopes and about an hour from Geneva airport. New to Indy this season.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "GVA",
+      "drive_min": 60
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 4265,
+    "reservations_required": false,
+    "website": "https://www.lescontamines.com/winter",
+    "apres_level": 1,
+    "flight": {
+      "min": 455,
+      "note": "nonstop from JFK"
+    }
+  },
+  {
+    "name": "Les 7 Laux",
+    "state": "France",
+    "tier": "Europe",
+    "trip": "The French Alps",
+    "rank": 3,
+    "my_note": "Built for skiers who chase storms, with deep off-piste bowls above Grenoble. New to Indy this season.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "LYS",
+      "drive_min": 90
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 3444,
+    "reservations_required": false,
+    "website": "https://www.les7laux.com/hiver/",
+    "apres_level": 1,
+    "flight": {
+      "min": 600,
+      "note": "one connection"
+    }
+  },
+  {
+    "name": "Levi",
+    "state": "Finland",
+    "tier": "Europe",
+    "trip": "Finnish Lapland: the Northern Lights",
+    "rank": 1,
+    "my_note": "Finland's biggest resort and a World Cup stop, with the liveliest après in Lapland and the aurora overhead.",
+    "lifts": "26 lifts, plus night skiing.",
+    "apres": "The liveliest après in Lapland, right in Levi village.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "KTT",
+      "drive_min": 15,
+      "also": "connect through Helsinki"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 1066,
+    "reservations_required": false,
+    "website": "https://www.levi.fi/en/",
+    "apres_level": 2,
+    "extras": [
+      {
+        "icon": "🌌",
+        "label": "Northern Lights",
+        "text": "Lapland, well above the Arctic Circle: ski by day, watch for the aurora at night."
+      },
+      {
+        "icon": "🧖",
+        "label": "Spa",
+        "text": "Levi Hotel Spa's Spa Water World, in the village: 17 indoor and outdoor pools, 9 saunas and steam rooms, and hot tubs."
+      }
+    ],
+    "flight": {
+      "min": 690,
+      "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Pyhä",
+    "state": "Finland",
+    "tier": "Europe",
+    "trip": "Finnish Lapland: the Northern Lights",
+    "rank": 2,
+    "my_note": "Ski by day and chase the Northern Lights by night, next to a national park with freeride terrain right off the lifts.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "RVN",
+      "drive_min": 90,
+      "also": "connect through Helsinki"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 768,
+    "reservations_required": false,
+    "website": "https://www.pyha.fi/en/skiresort-winter",
+    "extras": [
+      {
+        "icon": "🌌",
+        "label": "Northern Lights",
+        "text": "Next to Pyhä-Luosto National Park, away from town lights, and the resort builds its whole pitch around chasing the Northern Lights."
+      }
+    ],
+    "flight": {
+      "min": 690,
+      "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Ruka",
+    "state": "Finland",
+    "tier": "Europe",
+    "trip": "Finnish Lapland: the Northern Lights",
+    "rank": 3,
+    "my_note": "Finland's most popular resort, with snow from October to May and the airport just 20 km away.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "KAO",
+      "drive_min": 20,
+      "also": "connect through Helsinki"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 659,
+    "reservations_required": false,
+    "website": "https://www.ruka.fi/en",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "🌌",
+        "label": "Northern Lights",
+        "text": "Northern Lights season runs alongside the ski season."
+      },
+      {
+        "icon": "🧖",
+        "label": "Spa",
+        "text": "Holiday Club Kuusamon Tropiikki, a spa hotel near Kuusamo with indoor pools, a waterslide and saunas."
+      }
+    ],
+    "flight": {
+      "min": 690,
+      "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Geto Kogen",
+    "state": "Iwate",
+    "tier": "Japan",
+    "trip": "Tohoku powder belt",
+    "rank": 1,
+    "my_note": "The King of Snow: about 880 inches a year and fresh tracks with almost no competition. Then soak in one of Japan's best onsen at the base.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "Kitakami Stn",
+      "drive_min": 45,
+      "also": "Tohoku Shinkansen from Tokyo to Kitakami"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 1410,
+    "reservations_required": false,
+    "website": "https://www.getokogen.com/",
+    "extras": [
+      {
+        "icon": "♨️",
+        "label": "Onsen",
+        "text": "Geto Onsen at the base lodge, ranked among Japan's best, with indoor baths and an outdoor bath overlooking the snowy valley."
+      }
+    ],
+    "flight": {
+      "min": 855,
+      "note": "nonstop to Tokyo (HND or NRT), then the bullet train"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Aomori Spring",
+    "state": "Aomori",
+    "tier": "Japan",
+    "trip": "Tohoku powder belt",
+    "rank": 2,
+    "my_note": "Japanese powder off the beaten path: about 320 inches a year at the foot of Mt. Iwaki, with steep trees if you're willing to hike for them.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "AOJ",
+      "drive_min": 60
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 1788,
+    "reservations_required": false,
+    "website": "https://aomorispringski.com/",
+    "flight": {
+      "min": 1020,
+      "note": "nonstop to Tokyo, then a domestic hop"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Kamui Ski Links",
+    "state": "Hokkaido",
+    "tier": "Japan",
+    "trip": "Hokkaido from Asahikawa",
+    "rank": 1,
+    "my_note": "Hokkaido powder at local prices: about 275 inches a year and two or three days of terrain near Asahikawa.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "AKJ",
+      "drive_min": 50,
+      "also": "Furano is nearby too"
+    },
+    "day_trip_or_weekend": "Week",
+    "vertical_ft": 1968,
+    "reservations_required": false,
+    "website": "https://www.kamui-skilinks.com/",
+    "flight": {
+      "min": 1020,
+      "note": "nonstop to Tokyo, then a domestic hop"
+    }
+  },
+  {
+    "name": "Pippu",
+    "state": "Hokkaido",
+    "tier": "Japan",
+    "trip": "Hokkaido from Asahikawa",
+    "rank": 2,
+    "my_note": "Nine runs, three lifts and powder days that feel private. The sidecountry is the draw.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "AKJ",
+      "drive_min": 35
+    },
+    "day_trip_or_weekend": "Day",
+    "vertical_ft": 1053,
+    "reservations_required": false,
+    "website": "http://yuyupippu.com/",
+    "flight": {
+      "min": 1020,
+      "note": "nonstop to Tokyo, then a domestic hop"
+    },
+    "night_skiing": true
+  },
+  {
+    "name": "Kandatsu",
+    "state": "Niigata",
+    "tier": "Japan",
+    "trip": "From Tokyo by bullet train",
+    "rank": 1,
+    "my_note": "Take the bullet train from Tokyo and a 7-minute shuttle, and you're skiing about 396 inches of natural snow a year. Then soak in the on-site hot spring.",
+    "apres": "The Kami no Yu hot spring and sauna on site, and night skiing until 2 a.m. on Fridays and Saturdays.",
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "Echigo-Yuzawa Stn",
+      "drive_min": 7,
+      "also": "Joetsu Shinkansen from Tokyo, about 75 min"
+    },
+    "day_trip_or_weekend": "Day trip from Tokyo",
+    "vertical_ft": 1772,
+    "reservations_required": false,
+    "website": "https://www.indyskipass.com/our-resorts/kandatsu-snow-resort",
+    "apres_level": 1,
+    "extras": [
+      {
+        "icon": "♨️",
+        "label": "Onsen",
+        "text": "Kami no Yu hot spring and sauna on site."
+      }
+    ],
+    "flight": {
+      "min": 855,
+      "note": "nonstop to Tokyo (HND or NRT), then the bullet train"
+    },
+    "night_skiing": true
+  }
+]
+</script>
+<script>
+(function () {
+  const resorts = JSON.parse(document.getElementById("resort-data").textContent);
+  const blurbs = {
+    "Short flights": "About 1h30 nonstop to Burlington (BTV); every pick here is within a 2-hour drive of it.",
+    "Out west": "Each one is close to a major airport. The time shown is the drive from that airport.",
+    "Europe": "Trip ideas, each built around one airport. Times are the drive from that airport.",
+    "Japan": "Only the places worth the flight, grouped into trips. Times are from the airport or train station.",
+  };
+  const trips = {
+    "New Hampshire weekend: Ragged + Waterville": "Two mountains, one weekend. Ragged and Waterville are about an hour apart off I-93, so ski Ragged on the way up Saturday, then stay in Waterville Valley for Sunday and Town Square après.",
+    "Austria: Innsbruck + SkiWelt": "Part of the group is already going for New Year's Eve, so this is the easiest trip to join. Fly into Munich, drive about 1h15 to the SkiWelt and spend a few days eating your way across it, then continue about an hour to Innsbruck for the SKI plus CITY network and Nordkette.",
+    "The French Alps": "Fly into Geneva for Portes du Soleil and Les Contamines. Les 7 Laux is easier from Grenoble or Lyon.",
+    "Finnish Lapland: the Northern Lights": "Connect through Helsinki. Finnish saunas are everywhere, these resorts sit near or above the Arctic Circle, and the aurora season runs from about late August to April.",
+    "Tohoku powder belt": "Take the shinkansen north from Tokyo: some of the deepest snow in Japan, with far fewer visitors than Hokkaido.",
+    "Hokkaido from Asahikawa": "Fly from Tokyo to Asahikawa (AKJ) for classic Hokkaido powder without the Niseko crowds.",
+    "From Tokyo by bullet train": "A powder day you can fit into a Tokyo trip.",
+  };
+  const ABROAD = ["Europe", "Japan"];
+
+  // Tiers and trips appear in the order they first show up in the data.
+  const tiers = [...new Set(resorts.map((r) => r.tier))];
+  const $ = (id) => document.getElementById(id);
+  const slider = $("max-drive"), out = $("drive-out");
+  const flightSlider = $("max-flight"), flightOut = $("flight-out");
+  const state = { good: false, extras: false, domestic: false };
+  try {
+    const saved = JSON.parse(localStorage.getItem("indy-view") || "{}");
+    state.good = saved.good === true;
+    state.extras = saved.extras === true;
+    state.domestic = saved.domestic === true;
+  } catch (e) {}
+
+  const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  const hm = (min) => { const h = Math.floor(min / 60), m = min % 60; return h ? (m ? `${h}h ${m}m` : `${h}h`) : `${m}m`; };
+  const host = (u) => u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+  // The drive that matters: from Manhattan, or from the airport/station for fly-in trips.
+  const drive = (r) => r.fly_to ? r.fly_to.drive_min : r.drive_time_from_manhattan;
+  const from = (r) => r.fly_to ? `from ${r.fly_to.airport}` : "drive";
+
+const BEER_LABEL = { 1: "Good après", 2: "Great après" };
+const beer = (r) => r.apres_level
+  ? `<span class="beer" role="img" aria-label="${BEER_LABEL[r.apres_level]}" title="${BEER_LABEL[r.apres_level]}">${"🍺".repeat(r.apres_level)}</span>`
+  : "";
+
+  const farthest = Math.max(...resorts.map(drive));
+  slider.max = Math.ceil(farthest / 15) * 15;
+  slider.value = slider.max;
+
+  const badge = (r) => r.reservations_required
+    ? '<span class="badge res">Reservation required</span>'
+    : '<span class="badge nores">No reservation</span>';
+
+  const nightText = (r) => r.fly_to
+    ? "Night skiing, so no early alarm: you can land, check in and still ski under the lights."
+    : "Night skiing, so no early alarm: leave the city after lunch and ski under the lights.";
+  const extraChips = (r) => (r.extras || r.night_skiing)
+    ? `<span class="extras">${r.night_skiing ? '<span class="extra night">🌙 Night skiing · no early alarm</span>' : ""}${(r.extras || []).map((e) => `<span class="extra">${e.icon} ${esc(e.label)}</span>`).join("")}</span>`
+    : "";
+  const flyLine = (r) => r.flight ? `<span class="fly">✈ ${hm(r.flight.min)}</span>` : "";
+  const perks = (r) =>
+    (r.lifts ? `<p class="apres"><b>Lifts</b>${esc(r.lifts)}</p>` : "") +
+    (r.apres ? `<p class="apres"><b>Après</b>${esc(r.apres)}</p>` : "");
+
+  function details(r) {
+    const access = r.fly_to
+      ? `<dt>Get there</dt><dd>${esc(r.fly_to.airport)}, then ${hm(r.fly_to.drive_min)}${r.fly_to.also ? ` (${esc(r.fly_to.also)})` : ""}</dd>`
+      : "";
+    return `<dl class="details">
+      ${r.highlights ? `<dt>Why</dt><dd><ul class="highlights">${r.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul></dd>` : ""}
+      ${r.extras ? `<dt>Extras</dt><dd><ul class="extras-list">${r.extras.map((e) => `<li>${e.icon} ${esc(e.text)}</li>`).join("")}</ul></dd>` : ""}
+      ${r.flight ? `<dt>Flight</dt><dd>About ${hm(r.flight.min)} from NYC, ${esc(r.flight.note)}</dd>` : ""}
+      ${r.night_skiing ? `<dt>Night</dt><dd>${nightText(r)}</dd>` : ""}
+      ${access}
+      <dt>Trip</dt><dd>${esc(r.day_trip_or_weekend)}</dd>
+      ${r.vertical_ft ? `<dt>Vertical</dt><dd class="num">${Number(r.vertical_ft).toLocaleString()} ft</dd>` : ""}
+      <dt>Indy</dt><dd>${r.reservations_required ? "Reservation required: book on the Indy Pass site first" : "No reservation needed"}${r.pass_note ? `. ${esc(r.pass_note)}` : ""}</dd>
+      <dt>Site</dt><dd><a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(host(r.website))}</a></dd>
+    </dl>`;
+  }
+
+  function card(r) {
+    const t = drive(r);
+    const rank = `<span class="rank">#${r.rank}</span>`;
+    const meta = `<span class="meta">${badge(r)}<span class="chev" aria-hidden="true">▼</span></span>`;
+    if (r.featured) {
+      return `<li><details class="card feature">
+        <summary>
+          <span class="kicker">${rank}${esc(r.kicker || "The headliner")} · ${esc(r.state)}</span>
+          <span class="name">${esc(r.name)}${beer(r)}</span>
+          <span class="time">${hm(t)}<small>${from(r)}</small>${flyLine(r)}</span>
+          ${r.stats ? `<span class="stats">${r.stats.map((s) => `<span class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></span>`).join("")}</span>` : ""}
+          <p class="note">${esc(r.my_note)}</p>
+          ${extraChips(r)}
+          ${perks(r)}
+          ${meta}
+        </summary>
+        ${details(r)}
+      </details></li>`;
+    }
+    return `<li><details class="card">
+      <summary>
+        <span class="name">${rank}${esc(r.name)}${beer(r)}<span class="state">${esc(r.state)}</span></span>
+        <span class="time" aria-label="${hm(t)} ${from(r)}">${hm(t)}<small>${from(r)}</small>${flyLine(r)}</span>
+        <p class="note">${esc(r.my_note)}</p>
+        ${extraChips(r)}
+        ${perks(r)}
+        ${meta}
+      </summary>
+      ${details(r)}
+    </details></li>`;
+  }
+
+  const order = (items) => items.sort((a, b) => a.rank - b.rank);
+  const list = (items) => `<ul class="cards">${order(items).map(card).join("")}</ul>`;
+
+  function render() {
+    const max = Number(slider.value), anyDrive = max >= Number(slider.max);
+    out.textContent = anyDrive ? "Any" : hm(max);
+    const maxF = Number(flightSlider.value), anyFlight = maxF >= Number(flightSlider.max);
+    flightOut.textContent = anyFlight ? "Any" : maxF === 0 ? "No flights" : hm(maxF);
+    $("good-apres").checked = state.good;
+    $("has-extras").checked = state.extras;
+    $("domestic").checked = state.domestic;
+
+    const shown = resorts.filter((r) =>
+      (anyDrive || drive(r) <= max) &&
+      (anyFlight || !r.flight || r.flight.min <= maxF) &&
+      (!state.good || r.apres_level) &&
+      (!state.extras || r.extras) &&
+      (!state.domestic || !ABROAD.includes(r.tier)));
+    const inTier = (t) => shown.filter((r) => r.tier === t);
+    const visibleTiers = tiers.filter((t) => !(state.domestic && ABROAD.includes(t)));
+
+    $("tiers").innerHTML = visibleTiers.map((t) => {
+      const items = inTier(t);
+      if (!items.length) return "";
+      const tripNames = [...new Set(items.map((r) => r.trip).filter(Boolean))];
+      const body = tripNames.length
+        ? tripNames.map((name) => `<div class="trip"><h3>${esc(name)}</h3>
+            ${trips[name] ? `<p class="blurb">${esc(trips[name])}</p>` : ""}
+            ${list(items.filter((r) => r.trip === name))}</div>`).join("")
+        : list(items);
+      return `<section class="tier" id="${slug(t)}"><h2>${esc(t)}<span class="n">${items.length}</span></h2>
+        ${blurbs[t] ? `<p class="blurb">${esc(blurbs[t])}</p>` : ""}
+        ${body}</section>`;
+    }).join("");
+
+    $("jump").innerHTML = visibleTiers.map((t) => {
+      const n = inTier(t).length;
+      return `<a href="#${slug(t)}" class="${n ? "" : "empty"}">${esc(t)}<span class="n">${n}</span></a>`;
+    }).join("");
+
+    $("none").hidden = shown.length > 0;
+    try { localStorage.setItem("indy-view", JSON.stringify(state)); } catch (e) {}
+  }
+
+  $("has-extras").addEventListener("change", (e) => { state.extras = e.target.checked; render(); });
+  $("good-apres").addEventListener("change", (e) => { state.good = e.target.checked; render(); });
+  $("domestic").addEventListener("change", (e) => { state.domestic = e.target.checked; render(); });
+  $("filters").addEventListener("submit", (e) => e.preventDefault());
+  slider.addEventListener("input", render);
+  flightSlider.addEventListener("input", render);
+  render();
+})();
+</script>
+
+</body>
+</html>
