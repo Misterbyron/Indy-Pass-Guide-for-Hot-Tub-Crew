@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Tiered Indy Pass picks from New York City for the 2026/27 season: drive-to hills, short flights, out west, Europe and Japan.">
+<meta name="description" content="Tiered Indy Pass picks from New York City for the 2026/27 season: drive-to hills, a car-free Vermont weekend, short flights, out west, Europe and Japan.">
 <title>Indy Pass from NYC</title>
 <style>body { margin: 0; } [hidden] { display: none !important; }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -136,6 +136,8 @@ h1 {
 .card.feature .time .fly { color: var(--feature-muted); }
 .extra.night { background: var(--accent-soft); color: var(--accent); }
 .extra.stay { background: var(--go-soft); color: var(--go); }
+.extra.train { background: var(--accent-soft); color: var(--accent); }
+.card.feature .extra.train { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
 .card.feature .extra.stay { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
 .card.feature .extra.night { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
 .when { grid-column: 1 / -1; font-size: 0.85rem; color: var(--ink); }
@@ -143,6 +145,8 @@ h1 {
 .card.feature .when { color: var(--feature-ink); }
 .card.feature .when b { color: var(--feature-muted); }
 .when .go { display: inline-block; margin-left: 8px; font-weight: 600; color: var(--go); }
+.when .minstay { display: inline-block; margin-left: 8px; font-weight: 600; color: var(--accent); }
+.card.feature .when .minstay { color: var(--feature-ink); }
 .card.feature .when .go { color: var(--feature-ink); }
 .strategy { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--ink); font-size: 0.9rem; max-width: 60ch; }
 .strategy b { color: var(--accent); }
@@ -264,7 +268,7 @@ main.wrap { padding-block: 4px 8px; display: grid; gap: 4px; }
   text-transform: uppercase;
   color: var(--feature-muted);
 }
-.card.feature .name { font: 700 2rem/1 var(--font-display); text-transform: uppercase; }
+.card.feature .name { font: 700 clamp(1.4rem, 6.5vw, 2rem)/1 var(--font-display); text-transform: uppercase; }
 .card.feature .state, .card.feature .time small, .card.feature .chev { color: var(--feature-muted); }
 .card.feature .note { color: var(--feature-ink); font-size: 0.98rem; }
 .card.feature .stats {
@@ -296,8 +300,10 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
 <header class="wrap">
   <p class="eyebrow">2026/27 season · from Manhattan</p>
   <h1>Indy Pass from NYC</h1>
-  <p class="sub">My tiered picks: drive-to hills first, then short flights, out west, and trip ideas for Europe and Japan. Ranked within each tier, with the lifts and après worth knowing about: 🍺 is good après, 🍺🍺 is great, 🛏️ means you can sleep slopeside, and ✨ marks extras like spas, onsen and the Northern Lights. Tap a resort for vertical, trip length and the website.</p>
+  <p class="sub">My tiered picks: drive-to hills first, then short flights, out west, and trip ideas for Europe and Japan. Ranked within each tier, with the lifts and après worth knowing about: 🍺 is good après, 🍺🍺 is great, 🛏️ means you can sleep slopeside, 🚆 means you can do it without a car, and ✨ marks extras like spas, onsen and the Northern Lights. Tap a resort for vertical, trip length and the website.</p>
   <p class="strategy"><b>Season strategy:</b> the East Coast season is short, so spend January and February on the drive-to hills. Save the late-season places, like Jay Peak, Loveland, the Alps and Lapland, for March and April.</p>
+  <p class="strategy"><b>Minimum stays:</b> the two-hour hills are day trips. Greek Peak and Berkshire East are worth one night, since night skiing lets you ski the day you arrive. Magic and anything farther without night skiing needs two nights, and Middlebury by train needs three.</p>
+  <p class="strategy"><b>Long weekends:</b> MLK (Jan 16–18) fits Middlebury by train with only a Friday afternoon off: up Friday, ski Saturday and Sunday, train home Monday morning. If the snow isn’t in yet, do Ragged + Waterville over three nights instead. Presidents’ Day (Feb 13–15) is peak snow and peak crowds, since it’s school vacation week, so use the extra night at Magic or in New Hampshire and book Indy reservations early. Take a Friday or Monday off in March for Jay Peak by car, about 6.5 hours each way, over three nights.</p>
 </header>
 
 <nav class="bar" aria-label="Tiers and filters">
@@ -307,6 +313,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
         <label class="pill" for="good-apres"><input type="checkbox" id="good-apres"><span>🍺 Après</span></label>
         <label class="pill" for="has-extras"><input type="checkbox" id="has-extras"><span>✨ Extras</span></label>
         <label class="pill" for="high-speed"><input type="checkbox" id="high-speed"><span>🚡 High-speed lifts</span></label>
+        <label class="pill" for="car-free"><input type="checkbox" id="car-free"><span>🚆 Car-free</span></label>
           <label class="pill" for="domestic"><input type="checkbox" id="domestic"><span>US &amp; Canada</span></label>
         <label class="range" for="max-drive">
           <span>Max drive<output id="drive-out" for="max-drive">Any</output></span>
@@ -324,7 +331,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
 <p class="none wrap" id="none" hidden>No resorts match. Try a longer drive or fewer filters.</p>
 
 <footer class="wrap">
-  <p>🍺 means good après and 🍺🍺 means great après. Those are my own calls. 🛏️ means there’s lodging at the base you can ski to or walk to the lifts from. 🚡 High-speed lifts means at least one detachable chair, gondola or cable car. Lodging and lift speed aren’t marked for the Japan picks, so the high-speed filter hides them.</p>
+  <p>🍺 means good après and 🍺🍺 means great après. Those are my own calls. 🛏️ means there’s lodging at the base you can ski to or walk to the lifts from. 🚡 High-speed lifts means at least one detachable chair, gondola or cable car. 🚆 Car-free means you can get there and get around without driving. Lodging and lift speed aren’t marked for the Japan picks, so the high-speed filter hides them.</p>
   <p>Every resort here has a current page on indyskipass.com. Vertical, snowfall and reservation rules come from those pages, checked October 2026. Season dates are last winter’s (2025–26) actual opening and closing days; ≈ marks an estimate. The season range on each card is last winter’s; the “best” window is my rule of thumb, not a forecast. Flight times are approximate scheduled times from JFK, LaGuardia or Newark, nonstop where one exists. Drive times are rough no-traffic estimates: from Midtown for the drive-to tiers, and from the airport or train station for everything else.</p>
   <p>Where a reservation is required, book it on the Indy Pass site before you drive up.</p>
 </footer>
@@ -350,7 +357,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "note": "About 120 days",
       "best": "Best Jan–Feb"
     },
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "Day trip"
   },
   {
     "name": "Montage Mountain",
@@ -373,7 +381,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "note": "A warm March; the last day was probably Mar 15, possibly Mar 22",
       "best": "Best Jan–Feb"
     },
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "Day trip"
   },
   {
     "name": "Shawnee Mountain",
@@ -395,7 +404,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Jan–Feb"
     },
     "high_speed": true,
-    "high_speed_lifts": "Tomahawk Express detachable quad"
+    "high_speed_lifts": "Tomahawk Express detachable quad",
+    "min_stay": "Day trip"
   },
   {
     "name": "Magic Mountain",
@@ -440,7 +450,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Feb, right after a storm"
     },
     "slopeside": "Upper Pass Lodge and Trailside ski-in/ski-out condos",
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "2 nights"
   },
   {
     "name": "Berkshire East",
@@ -471,7 +482,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Jan–Feb"
     },
     "high_speed": true,
-    "high_speed_lifts": "T-Bar Express detachable quad (2023)"
+    "high_speed_lifts": "T-Bar Express detachable quad (2023)",
+    "min_stay": "1 night"
   },
   {
     "name": "Greek Peak",
@@ -507,7 +519,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Jan–Feb"
     },
     "slopeside": "Hope Lake Lodge, across the road with a shuttle, plus mountainside condos",
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "1 night"
   },
   {
     "name": "Ragged Mountain",
@@ -547,7 +560,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Cardigan Cabins, ski-in/ski-out off the Barnyard trail",
     "high_speed": true,
-    "high_speed_lifts": "Summit Six and Spear Mountain Express"
+    "high_speed_lifts": "Summit Six and Spear Mountain Express",
+    "min_stay": "2 nights"
   },
   {
     "name": "Waterville Valley",
@@ -589,7 +603,72 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Jan–Mar"
     },
     "high_speed": true,
-    "high_speed_lifts": "Tecumseh Express six-pack"
+    "high_speed_lifts": "Tecumseh Express six-pack",
+    "min_stay": "2 nights"
+  },
+  {
+    "name": "Middlebury Snowbowl",
+    "state": "VT",
+    "tier": "Car-free from NYC",
+    "trip": "Middlebury by train",
+    "rank": 1,
+    "featured": true,
+    "kicker": "Car-free weekend",
+    "my_note": "Take the train to a Vermont college town, ride the free shuttle up, and ski glades and a natural-snow backside without touching a car. Go late January to February, right after a storm.",
+    "stats": [
+      {
+        "value": "1,020′",
+        "label": "vertical"
+      },
+      {
+        "value": "600+",
+        "label": "acres of woods"
+      },
+      {
+        "value": "11",
+        "label": "glades"
+      }
+    ],
+    "highlights": [
+      "The backside (the mountain's eastern face), reached by the Bailey Falls triple, runs on natural snow only. In a thin winter it may barely open, and that's where most of the fun is.",
+      "More than 600 acres of woods and 11 glades, with about 35% advanced terrain.",
+      "About 200 inches of snow a year. Snowmaking covers part of the front side only, so skip December and late March.",
+      "Owned by Middlebury College since 1936: cheap, uncrowded and old-school.",
+      "Closed non-holiday Mondays and Tuesdays. Night skiing Wednesday to Friday until 9."
+    ],
+    "drive_time_from_manhattan": null,
+    "fly_to": {
+      "airport": "Middlebury",
+      "drive_min": 35,
+      "also": "the free Tri-Valley Transit shuttle from Middlebury College to the base lodge"
+    },
+    "train": {
+      "min": 367,
+      "note": "Amtrak Ethan Allen Express from Penn Station, once a day: north 2:19 p.m. → Middlebury 8:26 p.m.; south 10:11 a.m. → Penn 4:27 p.m."
+    },
+    "day_trip_or_weekend": "Long weekend (Thursday to Sunday)",
+    "vertical_ft": 1020,
+    "reservations_required": null,
+    "website": "https://www.middleburysnowbowl.com/",
+    "pass_note": "Free Indy days, with no blackout dates",
+    "night_skiing": true,
+    "car_free": "Amtrak to Middlebury, then the free shuttle to the base lodge.",
+    "overnight": {
+      "summary": "The train runs once a day each way, so you can't ski Sunday and get home that night. Best plan: train up Thursday afternoon, ski Friday (the shuttle's busiest day, with lifts running late) and Saturday, and ride home Sunday morning.",
+      "label": "The plan",
+      "items": [
+        "Thursday: 2:19 p.m. from Penn Station, in Middlebury at 8:26 p.m.",
+        "Friday and Saturday: ski your two Indy days. The free Tri-Valley Transit shuttle leaves from Adirondack Circle at Middlebury College and takes about 35 minutes.",
+        "Sunday: 10:11 a.m. train, back at Penn Station at 4:27 p.m.",
+        "Or go Friday to Monday: ski Saturday and Sunday, then take Monday's train home.",
+        "The shuttle's posted schedule (Fridays plus weekends, early January to mid-March) looks like it's from an older season. Confirm with TVT at (802) 388-2287, and check the last run down before planning a night session.",
+        "The Friday shuttle also stops at Rikert Nordic Center, which has been on Indy's cross-country pass."
+      ]
+    },
+    "min_stay": "3 nights",
+    "season": {
+      "best": "Best late Jan–Feb, after a storm"
+    }
   },
   {
     "name": "Jay Peak",
@@ -649,7 +728,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Tram Haus Lodge and Hotel Jay at the base",
     "high_speed": true,
-    "high_speed_lifts": "Aerial tram, plus the Flyer and Jet express quads"
+    "high_speed_lifts": "Aerial tram, plus the Flyer and Jet express quads",
+    "min_stay": "2–3 nights"
   },
   {
     "name": "Bolton Valley",
@@ -681,7 +761,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Feb–Mar"
     },
     "slopeside": "The Inn at Bolton Valley, ski-in/ski-out next to the base lodge",
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "2 nights"
   },
   {
     "name": "Smugglers' Notch",
@@ -710,7 +791,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Feb–Mar"
     },
     "slopeside": "Ski-in/ski-out condos in the village at the base",
-    "high_speed": false
+    "high_speed": false,
+    "min_stay": "2 nights"
   },
   {
     "name": "Burke Mountain",
@@ -741,7 +823,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Burke Mountain Hotel, 116 ski-in/ski-out suites",
     "high_speed": true,
-    "high_speed_lifts": "Sherburne Express and Mid-Burke Express"
+    "high_speed_lifts": "Sherburne Express and Mid-Burke Express",
+    "min_stay": "2 nights"
   },
   {
     "name": "Cannon Mountain",
@@ -771,7 +854,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Feb–Mar"
     },
     "high_speed": true,
-    "high_speed_lifts": "Peabody Express and Cannonball Express"
+    "high_speed_lifts": "Peabody Express and Cannonball Express",
+    "min_stay": "2 nights"
   },
   {
     "name": "Owl's Head",
@@ -801,7 +885,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Hôtel du Hibou, ski-in/ski-out suites in the main chalet",
     "high_speed": true,
-    "high_speed_lifts": "Sommet and Panorama detachable quads"
+    "high_speed_lifts": "Sommet and Panorama detachable quads",
+    "min_stay": "2 nights"
   },
   {
     "name": "Mont Sutton",
@@ -831,7 +916,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Ski-in/ski-out condo rentals near the base",
     "high_speed": true,
-    "high_speed_lifts": "Chair #2 detachable quad"
+    "high_speed_lifts": "Chair #2 detachable quad",
+    "min_stay": "2 nights"
   },
   {
     "name": "Loveland",
@@ -886,7 +972,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Mar–Apr: it stays open late"
     },
     "high_speed": true,
-    "high_speed_lifts": "Chet's Dream"
+    "high_speed_lifts": "Chet's Dream",
+    "min_stay": "2 nights"
   },
   {
     "name": "Mountain High",
@@ -895,9 +982,9 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "my_note": "SoCal's closest snow: 90 minutes from downtown LA, an hour from Ontario airport, and night skiing Wednesday to Sunday in peak season.",
     "drive_time_from_manhattan": null,
     "fly_to": {
-      "airport": "ONT",
-      "drive_min": 60,
-      "also": "LAX or BUR about 1h45"
+      "airport": "LA",
+      "drive_min": 90,
+      "also": "from downtown Los Angeles; about 1h from Ontario airport"
     },
     "day_trip_or_weekend": "Trip",
     "vertical_ft": 1600,
@@ -907,7 +994,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "lifts": "Two high-speed quads, including the Blue Ridge Express, the most popular lift on the mountain.",
     "flight": {
       "min": 375,
-      "note": "JetBlue nonstop from JFK"
+      "note": "nonstop to LAX, Burbank or Ontario"
     },
     "night_skiing": true,
     "season": {
@@ -918,17 +1005,19 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Jan–Feb, right after a storm"
     },
     "high_speed": true,
-    "high_speed_lifts": "Mountain High Express and Blue Ridge Express"
+    "high_speed_lifts": "Mountain High Express and Blue Ridge Express",
+    "min_stay": "3 nights"
   },
   {
     "name": "Mt. Hood Meadows",
     "state": "OR",
     "tier": "Out west",
-    "my_note": "Big-mountain Oregon: 2,150 acres, 430 inches of snow a year and night skiing, about 1h45 from Portland's airport.",
+    "my_note": "Big-mountain Oregon: 2,150 acres, 430 inches of snow a year and night skiing, about 1h35 from downtown Portland.",
     "drive_time_from_manhattan": null,
     "fly_to": {
-      "airport": "PDX",
-      "drive_min": 105
+      "airport": "Portland",
+      "drive_min": 95,
+      "also": "from downtown Portland"
     },
     "day_trip_or_weekend": "Trip",
     "vertical_ft": 1939,
@@ -938,7 +1027,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "lifts": "A new Mt. Hood Express high-speed six-pack (2023–24) and five more high-speed quads.",
     "flight": {
       "min": 375,
-      "note": "nonstop"
+      "note": "nonstop to Portland (PDX)"
     },
     "night_skiing": true,
     "season": {
@@ -949,7 +1038,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Mar"
     },
     "high_speed": true,
-    "high_speed_lifts": "Mt. Hood Express six-pack and five high-speed quads"
+    "high_speed_lifts": "Mt. Hood Express six-pack and five high-speed quads",
+    "min_stay": "3 nights"
   },
   {
     "name": "Tamarack",
@@ -987,7 +1077,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "The Lodge at Osprey Meadows and village rooms with ski-in/ski-out access",
     "high_speed": true,
-    "high_speed_lifts": "Tamarack Express and Summit Express"
+    "high_speed_lifts": "Tamarack Express and Summit Express",
+    "min_stay": "3 nights"
   },
   {
     "name": "Brundage",
@@ -1023,7 +1114,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Mar"
     },
     "high_speed": true,
-    "high_speed_lifts": "Bluebird Express and Centennial Express"
+    "high_speed_lifts": "Bluebird Express and Centennial Express",
+    "min_stay": "3 nights"
   },
   {
     "name": "Snow King",
@@ -1064,7 +1156,9 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Snow King Resort Hotel and condos at the base",
     "high_speed": true,
-    "high_speed_lifts": "Snow King gondola"
+    "high_speed_lifts": "Snow King gondola",
+    "car_free": "A short taxi from Jackson Hole airport, then walk: the gondola leaves from the edge of downtown.",
+    "min_stay": "3 nights"
   },
   {
     "name": "Bear Valley",
@@ -1073,9 +1167,9 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "my_note": "California's sweet spot, as it calls itself: a big Sierra mountain with 1,679 acres and about 288 inches of snow a year.",
     "drive_time_from_manhattan": null,
     "fly_to": {
-      "airport": "SMF",
-      "drive_min": 165,
-      "also": "SFO or OAK about 3h30"
+      "airport": "the Bay Area",
+      "drive_min": 210,
+      "also": "from San Francisco or Oakland, about 3 hours from Sacramento"
     },
     "day_trip_or_weekend": "Trip",
     "vertical_ft": 1900,
@@ -1084,7 +1178,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "reservations_required": false,
     "flight": {
       "min": 390,
-      "note": "JetBlue nonstop from JFK"
+      "note": "nonstop to SFO or Oakland"
     },
     "season": {
       "opened": "2025-11-28",
@@ -1094,7 +1188,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best Feb–Mar"
     },
     "high_speed": true,
-    "high_speed_lifts": "Mokelumne Express and Polar Express six-packs"
+    "high_speed_lifts": "Mokelumne Express and Polar Express six-packs",
+    "min_stay": "3 nights"
   },
   {
     "name": "Innsbruck SKI plus CITY",
@@ -1149,7 +1244,9 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "best": "Best around New Year's with the group, or Mar–Apr on the glacier"
     },
     "high_speed": true,
-    "high_speed_lifts": "Nordkette cable cars and the Patscherkofelbahn gondola"
+    "high_speed_lifts": "Nordkette cable cars and the Patscherkofelbahn gondola",
+    "car_free": "Train from Munich (about 2.5 to 3 hours from the airport with a change), then the Hungerburg funicular straight from the Old Town.",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "SkiWelt Wilder Kaiser–Brixental",
@@ -1216,7 +1313,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Ski-in hotels in Söll, Ellmau and Scheffau",
     "high_speed": true,
-    "high_speed_lifts": "Hohe Salve gondola, Hartkaiserbahn and dozens more"
+    "high_speed_lifts": "Hohe Salve gondola, Hartkaiserbahn and dozens more",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Portes du Soleil",
@@ -1248,7 +1346,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Avoriaz is car-free and fully ski-in/ski-out",
     "high_speed": true,
-    "high_speed_lifts": "Prodains Express and Super Morzine gondola"
+    "high_speed_lifts": "Prodains Express and Super Morzine gondola",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Les Contamines",
@@ -1280,7 +1379,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Residences about 50 m from the Gorge gondola",
     "high_speed": true,
-    "high_speed_lifts": "La Gorge and Le Signal gondolas"
+    "high_speed_lifts": "La Gorge and Le Signal gondolas",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Les 7 Laux",
@@ -1312,7 +1412,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Les Granges des 7 Laux, ski-in/ski-out at Prapoutel",
     "high_speed": true,
-    "high_speed_lifts": "Chamois detachable six-pack"
+    "high_speed_lifts": "Chamois detachable six-pack",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Levi",
@@ -1360,7 +1461,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Panorama Hotel, ski-in/ski-out above the Front Slope",
     "high_speed": true,
-    "high_speed_lifts": "Levi Express gondola and the front-slope gondolas"
+    "high_speed_lifts": "Levi Express gondola and the front-slope gondolas",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Pyhä",
@@ -1400,7 +1502,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Ski-Inn PyhäSuites at the foot of the slopes",
     "high_speed": true,
-    "high_speed_lifts": "Pyhä Express six-pack"
+    "high_speed_lifts": "Pyhä Express six-pack",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Ruka",
@@ -1446,7 +1549,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     },
     "slopeside": "Ski-Inn RukaVillage, ski to the door",
     "high_speed": true,
-    "high_speed_lifts": "Village-2-Valley gondola and Village Express"
+    "high_speed_lifts": "Village-2-Valley gondola and Village Express",
+    "min_stay": "A week, as one trip"
   },
   {
     "name": "Geto Kogen",
@@ -1483,7 +1587,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "confidence": "likely",
       "note": "Usually runs into Golden Week in early May; deepest powder Jan–Feb",
       "best": "Best Jan–Feb for powder, or Apr for spring skiing"
-    }
+    },
+    "min_stay": "A week or more, as one trip"
   },
   {
     "name": "Aomori Spring",
@@ -1512,7 +1617,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "confidence": "likely",
       "note": "Best powder Jan–Feb",
       "best": "Best Jan–Feb"
-    }
+    },
+    "min_stay": "A week or more, as one trip"
   },
   {
     "name": "Kamui Ski Links",
@@ -1541,7 +1647,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "confidence": "confirmed",
       "note": "Thin snow in places at opening",
       "best": "Best Jan–Feb"
-    }
+    },
+    "min_stay": "A week or more, as one trip"
   },
   {
     "name": "Pippu",
@@ -1570,7 +1677,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "confidence": "likely",
       "note": "Night skiing runs through February",
       "best": "Best Jan–Feb"
-    }
+    },
+    "min_stay": "A week or more, as one trip"
   },
   {
     "name": "Kandatsu",
@@ -1609,7 +1717,8 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "confidence": "confirmed",
       "note": "Fully open from Jan 24; closed 12 days early as the snow melted. Best mid-January to February",
       "best": "Best mid-Jan–Feb"
-    }
+    },
+    "min_stay": "Day trip from Tokyo"
   }
 ]
 </script>
@@ -1617,12 +1726,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
 (function () {
   const resorts = JSON.parse(document.getElementById("resort-data").textContent);
   const blurbs = {
+    "Car-free from NYC": "Weekends you can do without a car. The time shown is from the station; 🚆 is the train from Penn Station.",
     "Short flights": "About 1h30 nonstop to Burlington (BTV); every pick here is within a 2-hour drive of it.",
-    "Out west": "Each one is close to a major airport. The time shown is the drive from that airport.",
+    "Out west": "Each one is close to a major city. Times are the drive from LA or the Bay Area for California, from Portland for Oregon, and from the airport everywhere else.",
     "Europe": "Trip ideas, each built around one airport. Times are the drive from that airport.",
     "Japan": "Only the places worth the flight, grouped into trips. Times are from the airport or train station.",
   };
   const trips = {
+    "Middlebury by train": "A cute Vermont weekend with no car: Amtrak to a college town, a free shuttle up the mountain, and a walkable town for dinner.",
     "New Hampshire weekend: Ragged + Waterville": "Two mountains, one weekend. Ragged and Waterville are about an hour apart off I-93, so ski Ragged on the way up Saturday, then stay in Waterville Valley for Sunday and Town Square après.",
     "Austria: Innsbruck + SkiWelt": "Part of the group is already going for New Year's Eve, so this is the easiest trip to join. Fly into Munich, drive about 1h15 to the SkiWelt and spend a few days eating your way across it, then continue about an hour to Innsbruck for the SKI plus CITY network and Nordkette.",
     "The French Alps": "Fly into Geneva for Portes du Soleil and Les Contamines. Les 7 Laux is easier from Grenoble or Lyon.",
@@ -1638,13 +1749,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
   const $ = (id) => document.getElementById(id);
   const slider = $("max-drive"), out = $("drive-out");
   const flightSlider = $("max-flight"), flightOut = $("flight-out");
-  const state = { good: false, extras: false, domestic: false, fast: false };
+  const state = { good: false, extras: false, domestic: false, fast: false, carfree: false };
   try {
     const saved = JSON.parse(localStorage.getItem("indy-view") || "{}");
     state.good = saved.good === true;
     state.extras = saved.extras === true;
     state.domestic = saved.domestic === true;
     state.fast = saved.fast === true;
+    state.carfree = saved.carfree === true;
   } catch (e) {}
 
   const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -1667,25 +1779,32 @@ const beer = (r) => r.apres_level
   flightSlider.max = Math.ceil(longestFlight / 30) * 30;
   flightSlider.value = flightSlider.max;
 
-  const badge = (r) => r.reservations_required
+  const badge = (r) => r.reservations_required == null
+    ? '<span class="badge nores">Check Indy reservation rules</span>'
+    : r.reservations_required
     ? '<span class="badge res">Reservation required</span>'
     : '<span class="badge nores">No reservation</span>';
 
-  const nightText = (r) => r.fly_to
+  const nightText = (r) => r.train
+    ? "Night skiing midweek, so a Friday on the hill can run until 9."
+    : r.fly_to
     ? "Night skiing, so no early alarm: you can land, check in and still ski under the lights."
     : "Night skiing, so no early alarm: leave the city after lunch and ski under the lights.";
-  const extraChips = (r) => (r.extras || r.night_skiing || r.slopeside)
-    ? `<span class="extras">${r.slopeside ? '<span class="extra stay">🛏️ Slopeside lodging</span>' : ""}${r.night_skiing ? '<span class="extra night">🌙 Night skiing · no early alarm</span>' : ""}${(r.extras || []).map((e) => `<span class="extra">${e.icon} ${esc(e.label)}</span>`).join("")}</span>`
+  const extraChips = (r) => (r.extras || r.night_skiing || r.slopeside || r.car_free)
+    ? `<span class="extras">${r.car_free ? '<span class="extra train">🚆 Car-free</span>' : ""}${r.slopeside ? '<span class="extra stay">🛏️ Slopeside lodging</span>' : ""}${r.night_skiing ? '<span class="extra night">🌙 Night skiing · no early alarm</span>' : ""}${(r.extras || []).map((e) => `<span class="extra">${e.icon} ${esc(e.label)}</span>`).join("")}</span>`
     : "";
   const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const day = (iso) => { const [y, m, d] = iso.split("-").map(Number); return `${MON[m - 1]} ${d}, ${y}`; };
   const part = (iso) => { const [, m, dd] = iso.split("-").map(Number); return `${dd <= 10 ? "early" : dd <= 20 ? "mid" : "late"} ${MON[m - 1]}`; };
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
   const when = (r) => {
-    const s = r.season;
-    if (!s || !s.opened || !s.closed) return "";
+    const s = r.season || {};
+    const dated = s.opened && s.closed;
+    if (!dated && !s.best && !r.min_stay) return "";
     const approx = s.confidence === "estimate" ? "≈ " : "";
-    return `<p class="when"><b>Season</b>${approx}${cap(part(s.opened))} – ${part(s.closed)}${s.best ? `<span class="go">${esc(s.best)}</span>` : ""}</p>`;
+    const range = dated ? `${approx}${cap(part(s.opened))} – ${part(s.closed)}` : "";
+    const stay = r.min_stay ? `<span class="minstay">${/^Day trip/.test(r.min_stay) || /trip$/.test(r.min_stay) ? esc(r.min_stay) : `Min. ${esc(r.min_stay)}`}</span>` : "";
+    return `<p class="when"><b>Timing</b>${range}${s.best ? `<span class="go">${esc(s.best)}</span>` : ""}${stay}</p>`;
   };
   const lastSeason = (r) => {
     const s = r.season;
@@ -1693,10 +1812,11 @@ const beer = (r) => r.apres_level
     const approx = s.confidence === "estimate" ? "≈ " : "";
     return `<dt>Last season</dt><dd>${approx}Opened ${day(s.opened)}, closed ${day(s.closed)}${s.note ? `. ${esc(s.note)}` : ""}</dd>`;
   };
-  const flyLine = (r) => r.flight ? `<span class="fly">✈ ${hm(r.flight.min)}</span>` : "";
+  const flyLine = (r) => r.flight ? `<span class="fly">✈ ${hm(r.flight.min)}</span>` : r.train ? `<span class="fly">🚆 ${hm(r.train.min)}</span>` : "";
   const perks = (r) =>
     (r.lifts ? `<p class="apres"><b>Lifts</b>${esc(r.lifts)}</p>` : "") +
-    (r.apres ? `<p class="apres"><b>Après</b>${esc(r.apres)}</p>` : "");
+    (r.apres ? `<p class="apres"><b>Après</b>${esc(r.apres)}</p>` : "") +
+    (r.overnight ? `<p class="apres"><b>Stay overnight</b>${esc(r.overnight.summary)}</p>` : "");
 
   function details(r) {
     const access = r.fly_to
@@ -1704,6 +1824,9 @@ const beer = (r) => r.apres_level
       : "";
     return `<dl class="details">
       ${r.highlights ? `<dt>Why</dt><dd><ul class="highlights">${r.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul></dd>` : ""}
+      ${r.overnight ? `<dt>${esc(r.overnight.label)}</dt><dd><ul class="highlights">${r.overnight.items.map((h) => `<li>${esc(h)}</li>`).join("")}</ul></dd>` : ""}
+      ${r.car_free ? `<dt>Car-free</dt><dd>🚆 ${esc(r.car_free)}</dd>` : ""}
+      ${r.train ? `<dt>Train</dt><dd>About ${hm(r.train.min)}. ${esc(r.train.note)}</dd>` : ""}
       ${r.extras ? `<dt>Extras</dt><dd><ul class="extras-list">${r.extras.map((e) => `<li>${e.icon} ${esc(e.text)}</li>`).join("")}</ul></dd>` : ""}
       ${lastSeason(r)}
       ${r.flight ? `<dt>Flight</dt><dd>About ${hm(r.flight.min)} from NYC, ${esc(r.flight.note)}</dd>` : ""}
@@ -1711,9 +1834,9 @@ const beer = (r) => r.apres_level
       ${r.high_speed_lifts ? `<dt>Fast lifts</dt><dd>🚡 ${esc(r.high_speed_lifts)}</dd>` : ""}
       ${r.night_skiing ? `<dt>Night</dt><dd>${nightText(r)}</dd>` : ""}
       ${access}
-      <dt>Trip</dt><dd>${esc(r.day_trip_or_weekend)}</dd>
+      <dt>Stay</dt><dd>${r.min_stay ? `Minimum: ${esc(r.min_stay)}` : esc(r.day_trip_or_weekend)}</dd>
       ${r.vertical_ft ? `<dt>Vertical</dt><dd class="num">${Number(r.vertical_ft).toLocaleString()} ft</dd>` : ""}
-      <dt>Indy</dt><dd>${r.reservations_required ? "Reservation required: book on the Indy Pass site first" : "No reservation needed"}${r.pass_note ? `. ${esc(r.pass_note)}` : ""}</dd>
+      <dt>Indy</dt><dd>${r.reservations_required == null ? "Check the Indy Pass site for reservation rules" : r.reservations_required ? "Reservation required: book on the Indy Pass site first" : "No reservation needed"}${r.pass_note ? `. ${esc(r.pass_note)}` : ""}</dd>
       <dt>Site</dt><dd><a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(host(r.website))}</a></dd>
     </dl>`;
   }
@@ -1764,6 +1887,7 @@ const beer = (r) => r.apres_level
     $("has-extras").checked = state.extras;
     $("domestic").checked = state.domestic;
     $("high-speed").checked = state.fast;
+    $("car-free").checked = state.carfree;
 
     const shown = resorts.filter((r) =>
       (anyDrive || drive(r) <= max) &&
@@ -1771,6 +1895,7 @@ const beer = (r) => r.apres_level
       (!state.good || r.apres_level) &&
       (!state.extras || r.extras) &&
       (!state.fast || r.high_speed) &&
+      (!state.carfree || r.car_free) &&
       (!state.domestic || !ABROAD.includes(r.tier)));
     const inTier = (t) => shown.filter((r) => r.tier === t);
     const visibleTiers = tiers.filter((t) => !(state.domestic && ABROAD.includes(t)));
@@ -1802,6 +1927,7 @@ const beer = (r) => r.apres_level
   $("good-apres").addEventListener("change", (e) => { state.good = e.target.checked; render(); });
   $("domestic").addEventListener("change", (e) => { state.domestic = e.target.checked; render(); });
   $("high-speed").addEventListener("change", (e) => { state.fast = e.target.checked; render(); });
+  $("car-free").addEventListener("change", (e) => { state.carfree = e.target.checked; render(); });
   $("filters").addEventListener("submit", (e) => e.preventDefault());
   slider.addEventListener("input", render);
   flightSlider.addEventListener("input", render);
