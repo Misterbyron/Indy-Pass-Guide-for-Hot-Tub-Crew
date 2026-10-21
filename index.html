@@ -3,16 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>
-  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
-  body { margin: 0; }
-  img { max-width: 100%; }
-  [hidden] { display: none !important; }
-</style>
-</head>
-<body>
+<meta name="description" content="Tiered Indy Pass picks from New York City for the 2026/27 season: drive-to hills, short flights, out west, Europe and Japan.">
 <title>Indy Pass from NYC</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<style>body { margin: 0; } [hidden] { display: none !important; }</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
@@ -142,7 +135,17 @@ h1 {
 .time .fly { display: block; font-size: 0.72rem; color: var(--muted); }
 .card.feature .time .fly { color: var(--feature-muted); }
 .extra.night { background: var(--accent-soft); color: var(--accent); }
+.extra.stay { background: var(--go-soft); color: var(--go); }
+.card.feature .extra.stay { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
 .card.feature .extra.night { background: color-mix(in srgb, var(--feature-ink) 14%, transparent); color: var(--feature-ink); }
+.when { grid-column: 1 / -1; font-size: 0.85rem; color: var(--ink); }
+.when b { font: 500 0.68rem/1 var(--font-data); text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-right: 6px; }
+.card.feature .when { color: var(--feature-ink); }
+.card.feature .when b { color: var(--feature-muted); }
+.when .go { display: inline-block; margin-left: 8px; font-weight: 600; color: var(--go); }
+.card.feature .when .go { color: var(--feature-ink); }
+.strategy { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--ink); font-size: 0.9rem; max-width: 60ch; }
+.strategy b { color: var(--accent); }
 .beer { margin-left: 6px; font-size: 0.95rem; letter-spacing: 1px; }
 .tabs { display: flex; flex: 1; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 2px; }
 .tabs button {
@@ -228,8 +231,13 @@ main.wrap { padding-block: 4px 8px; display: grid; gap: 4px; }
 .badge.nores { background: var(--accent-soft); color: var(--accent); }
 .rank { font: 500 0.78rem/1 var(--font-data); color: var(--muted); margin-right: 8px; font-variant-numeric: tabular-nums; }
 .card.feature .rank { color: var(--feature-muted); }
-.chev { margin-left: auto; color: var(--muted); font-size: 0.75rem; transition: transform 0.15s; }
-.card[open] .chev { transform: rotate(180deg); }
+.chev { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font: 600 0.75rem/1 var(--font-body); white-space: nowrap; }
+.chev .arrow { font-size: 0.7rem; transition: transform 0.15s; }
+.chev .less, .card[open] .chev .more { display: none; }
+.card[open] .chev .less { display: inline; }
+.card[open] .chev .arrow { transform: rotate(180deg); }
+.card summary:hover .chev { color: var(--accent); }
+.card.feature summary:hover .chev { color: var(--feature-ink); }
 
 .details {
   margin: 0 15px;
@@ -283,11 +291,13 @@ main.wrap { padding-block: 4px 8px; display: grid; gap: 4px; }
 footer.wrap { padding-block: 36px 40px; color: var(--muted); font-size: 0.78rem; }
 footer p { margin: 0 0 6px; max-width: 60ch; }
 </style>
-
+</head>
+<body>
 <header class="wrap">
   <p class="eyebrow">2026/27 season · from Manhattan</p>
   <h1>Indy Pass from NYC</h1>
-  <p class="sub">My tiered picks: drive-to hills first, then short flights, out west, and trip ideas for Europe and Japan. Ranked within each tier, with the lifts and après worth knowing about: 🍺 is good après, 🍺🍺 is great, and ✨ marks extras like spas, onsen and the Northern Lights. Tap a resort for vertical, trip length and the website.</p>
+  <p class="sub">My tiered picks: drive-to hills first, then short flights, out west, and trip ideas for Europe and Japan. Ranked within each tier, with the lifts and après worth knowing about: 🍺 is good après, 🍺🍺 is great, 🛏️ means you can sleep slopeside, and ✨ marks extras like spas, onsen and the Northern Lights. Tap a resort for vertical, trip length and the website.</p>
+  <p class="strategy"><b>Season strategy:</b> the East Coast season is short, so spend January and February on the drive-to hills. Save the late-season places, like Jay Peak, Loveland, the Alps and Lapland, for March and April.</p>
 </header>
 
 <nav class="bar" aria-label="Tiers and filters">
@@ -296,6 +306,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     <div class="controls" id="filters">
         <label class="pill" for="good-apres"><input type="checkbox" id="good-apres"><span>🍺 Après</span></label>
         <label class="pill" for="has-extras"><input type="checkbox" id="has-extras"><span>✨ Extras</span></label>
+        <label class="pill" for="high-speed"><input type="checkbox" id="high-speed"><span>🚡 High-speed lifts</span></label>
           <label class="pill" for="domestic"><input type="checkbox" id="domestic"><span>US &amp; Canada</span></label>
         <label class="range" for="max-drive">
           <span>Max drive<output id="drive-out" for="max-drive">Any</output></span>
@@ -310,11 +321,11 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
 </nav>
 
 <main class="wrap" id="tiers" aria-live="polite"></main>
-<p class="none wrap" id="none" hidden>No resorts match. Try a longer drive.</p>
+<p class="none wrap" id="none" hidden>No resorts match. Try a longer drive or fewer filters.</p>
 
 <footer class="wrap">
-  <p>🍺 means good après and 🍺🍺 means great après. Those are my own calls.</p>
-  <p>Every resort here has a current page on indyskipass.com. Vertical, snowfall and reservation rules come from those pages, checked October 2026. Flight times are approximate scheduled times from JFK, LaGuardia or Newark, nonstop where one exists. Drive times are rough no-traffic estimates: from Midtown for the drive-to tiers, and from the airport or train station for everything else.</p>
+  <p>🍺 means good après and 🍺🍺 means great après. Those are my own calls. 🛏️ means there’s lodging at the base you can ski to or walk to the lifts from. 🚡 High-speed lifts means at least one detachable chair, gondola or cable car. Lodging and lift speed aren’t marked for the Japan picks, so the high-speed filter hides them.</p>
+  <p>Every resort here has a current page on indyskipass.com. Vertical, snowfall and reservation rules come from those pages, checked October 2026. Season dates are last winter’s (2025–26) actual opening and closing days; ≈ marks an estimate. The season range on each card is last winter’s; the “best” window is my rule of thumb, not a forecast. Flight times are approximate scheduled times from JFK, LaGuardia or Newark, nonstop where one exists. Drive times are rough no-traffic estimates: from Midtown for the drive-to tiers, and from the airport or train station for everything else.</p>
   <p>Where a reservation is required, book it on the Indy Pass site before you drive up.</p>
 </footer>
 
@@ -323,7 +334,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
   {
     "name": "Catamount",
     "state": "NY / MA",
-    "tier": "Within 2 hours",
+    "tier": "Within 2 hours drive from NYC",
     "my_note": "Straddles the New York–Massachusetts line, so you can ski across a state border before lunch. The closest Berkshires hill to the city.",
     "drive_time_from_manhattan": 135,
     "day_trip_or_weekend": "Day trip",
@@ -331,12 +342,20 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "reservations_required": true,
     "website": "https://www.catamountski.com",
     "rank": 1,
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-04-04",
+      "confidence": "confirmed",
+      "note": "About 120 days",
+      "best": "Best Jan–Feb"
+    },
+    "high_speed": false
   },
   {
     "name": "Montage Mountain",
     "state": "PA",
-    "tier": "Within 2 hours",
+    "tier": "Within 2 hours drive from NYC",
     "my_note": "Scranton, home of Dunder Mifflin. Bills itself as Pennsylvania's steepest, and 100% of it is lit for night skiing.",
     "drive_time_from_manhattan": 125,
     "day_trip_or_weekend": "Day trip",
@@ -346,12 +365,20 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "reservations_required": false,
     "apres": "Fire pits at Midland, the outdoor spot near the top of the Phoebe Snow lift, with drinks and waffles between runs.",
     "apres_level": 1,
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-10",
+      "closed": "2026-03-15",
+      "confidence": "estimate",
+      "note": "A warm March; the last day was probably Mar 15, possibly Mar 22",
+      "best": "Best Jan–Feb"
+    },
+    "high_speed": false
   },
   {
     "name": "Shawnee Mountain",
     "state": "PA",
-    "tier": "Within 2 hours",
+    "tier": "Within 2 hours drive from NYC",
     "my_note": "The closest Indy day trip to Manhattan, about 1h35 to the Poconos. Small, well groomed and lit for night skiing.",
     "drive_time_from_manhattan": 95,
     "day_trip_or_weekend": "Day trip",
@@ -359,12 +386,21 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "website": "https://www.shawneemt.com/",
     "rank": 3,
     "reservations_required": false,
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-12",
+      "closed": "2026-03-15",
+      "confidence": "likely",
+      "note": "Closed earlier than its usual end-of-March target because of a warm March",
+      "best": "Best Jan–Feb"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Tomahawk Express detachable quad"
   },
   {
     "name": "Magic Mountain",
     "state": "VT",
-    "tier": "Within 4 hours",
+    "tier": "Within 4 hours drive from NYC",
     "my_note": "Big powder and narrow, winding Vermont trails, with some of the best glades in the south of the state. Old-school Vermont vibes: independent, anti-corporate soul skiing. Its founder helped bring après to America, and the Black Line Tavern keeps that going.",
     "drive_time_from_manhattan": 240,
     "day_trip_or_weekend": "Weekend",
@@ -395,12 +431,21 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "Book your Indy reservation before you go"
     ],
     "apres": "The Black Line Tavern, upstairs in the base lodge. Magic founder Hans Thorner helped bring après culture to American skiing, and the BLT still has live music and a crowd two deep at the bar on weekends.",
-    "apres_level": 2
+    "apres_level": 2,
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-04-04",
+      "confidence": "confirmed",
+      "note": "About 107 days, described as a very good season",
+      "best": "Best Feb, right after a storm"
+    },
+    "slopeside": "Upper Pass Lodge and Trailside ski-in/ski-out condos",
+    "high_speed": false
   },
   {
     "name": "Berkshire East",
     "state": "MA",
-    "tier": "Within 4 hours",
+    "tier": "Within 4 hours drive from NYC",
     "my_note": "The biggest vertical in Massachusetts, with a mountain coaster and a live-music bar at the bottom.",
     "drive_time_from_manhattan": 210,
     "day_trip_or_weekend": "Weekend",
@@ -417,12 +462,21 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
         "text": "A mountain coaster at the base."
       }
     ],
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-06",
+      "closed": "2026-04-04",
+      "confidence": "likely",
+      "note": "",
+      "best": "Best Jan–Feb"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "T-Bar Express detachable quad (2023)"
   },
   {
     "name": "Greek Peak",
     "state": "NY",
-    "tier": "Within 4 hours",
+    "tier": "Within 4 hours drive from NYC",
     "my_note": "A real resort in the Finger Lakes. Stay on site at Hope Lake Lodge, ski glades that are easy to learn on, and finish in the spa or the waterpark.",
     "drive_time_from_manhattan": 220,
     "day_trip_or_weekend": "Weekend",
@@ -444,12 +498,21 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
         "text": "Cascades, a 41,000 sq ft indoor waterpark with a wave pool and outdoor hot tubs (lodge guests)."
       }
     ],
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-11-28",
+      "closed": "2026-03-29",
+      "confidence": "confirmed",
+      "note": "114 ski days, seven more than the year before; rain ended it",
+      "best": "Best Jan–Feb"
+    },
+    "slopeside": "Hope Lake Lodge, across the road with a shuttle, plus mountainside condos",
+    "high_speed": false
   },
   {
     "name": "Ragged Mountain",
     "state": "NH",
-    "tier": "Within 5 hours",
+    "tier": "Within 5 hours drive from NYC",
     "my_note": "New Hampshire's best-kept secret, by its own account: two peaks, 250 acres, 17 glades and two high-speed lifts.",
     "drive_time_from_manhattan": 260,
     "day_trip_or_weekend": "Weekend",
@@ -460,7 +523,7 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "lifts": "Two high-speed lifts: the Summit Six six-pack and the Spear Mountain Express quad.",
     "trip": "New Hampshire weekend: Ragged + Waterville",
     "featured": true,
-    "kicker": "The NH headliner",
+    "kicker": "NH weekend · day 1",
     "stats": [
       {
         "value": "1,250′",
@@ -474,12 +537,22 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
         "value": "17",
         "label": "glades"
       }
-    ]
+    ],
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-04-05",
+      "confidence": "likely",
+      "note": "",
+      "best": "Best Jan–early Mar"
+    },
+    "slopeside": "Cardigan Cabins, ski-in/ski-out off the Barnyard trail",
+    "high_speed": true,
+    "high_speed_lifts": "Summit Six and Spear Mountain Express"
   },
   {
     "name": "Waterville Valley",
     "state": "NH",
-    "tier": "Within 5 hours",
+    "tier": "Within 5 hours drive from NYC",
     "my_note": "Over 2,000 ft of vertical and New Hampshire's fastest chairlift. Ski down, then walk over to Town Square for darts and axe throwing.",
     "drive_time_from_manhattan": 290,
     "day_trip_or_weekend": "Weekend",
@@ -491,7 +564,32 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "lifts": "The Tecumseh Express, a bubble-covered six-pack that opened in 2022 as the fastest chairlift in New Hampshire. It climbs 1,585 vertical feet in about five minutes.",
     "apres_level": 1,
     "trip": "New Hampshire weekend: Ragged + Waterville",
-    "night_skiing": true
+    "night_skiing": true,
+    "featured": true,
+    "kicker": "NH weekend · day 2",
+    "stats": [
+      {
+        "value": "2,020′",
+        "label": "vertical"
+      },
+      {
+        "value": "265",
+        "label": "acres"
+      },
+      {
+        "value": "62",
+        "label": "trails"
+      }
+    ],
+    "season": {
+      "opened": "2025-11-29",
+      "closed": "2026-04-11",
+      "confidence": "confirmed",
+      "note": "About 132 days, into mid-April despite a warm March",
+      "best": "Best Jan–Mar"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Tecumseh Express six-pack"
   },
   {
     "name": "Jay Peak",
@@ -541,7 +639,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-11-22",
+      "closed": "2026-05-17",
+      "confidence": "confirmed",
+      "note": "Opened a week early and ran into mid-May on about 410 inches of snow; the last weekend was one lift only",
+      "best": "Best Mar–Apr: save it for late season"
+    },
+    "slopeside": "Tram Haus Lodge and Hotel Jay at the base",
+    "high_speed": true,
+    "high_speed_lifts": "Aerial tram, plus the Flyer and Jet express quads"
   },
   {
     "name": "Bolton Valley",
@@ -564,7 +672,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-11-22",
+      "closed": "2026-04-12",
+      "confidence": "confirmed",
+      "note": "Opened a week before its planned Black Friday date",
+      "best": "Best Feb–Mar"
+    },
+    "slopeside": "The Inn at Bolton Valley, ski-in/ski-out next to the base lodge",
+    "high_speed": false
   },
   {
     "name": "Smugglers' Notch",
@@ -584,7 +701,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-11-28",
+      "closed": "2026-04-12",
+      "confidence": "confirmed",
+      "note": "Just over 300 inches of snow for the season",
+      "best": "Best Feb–Mar"
+    },
+    "slopeside": "Ski-in/ski-out condos in the village at the base",
+    "high_speed": false
   },
   {
     "name": "Burke Mountain",
@@ -605,13 +731,23 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-12-06",
+      "closed": "2026-04-12",
+      "confidence": "likely",
+      "note": "",
+      "best": "Best Feb–Mar"
+    },
+    "slopeside": "Burke Mountain Hotel, 116 ski-in/ski-out suites",
+    "high_speed": true,
+    "high_speed_lifts": "Sherburne Express and Mid-Burke Express"
   },
   {
     "name": "Cannon Mountain",
     "state": "NH",
     "tier": "Short flights",
-    "my_note": "Steep, icy and legendary in Franconia Notch, with 2,180 ft of vertical and a tram to the summit.",
+    "my_note": "Steep, icy and legendary in Franconia Notch, with 2,180 ft of vertical. The summit tram is closed for a rebuild this season, but two express quads still get you up fast.",
     "drive_time_from_manhattan": null,
     "fly_to": {
       "airport": "BTV",
@@ -622,11 +758,20 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "reservations_required": true,
     "website": "https://www.cannonmt.com/",
     "rank": 5,
-    "lifts": "An aerial tramway to the summit, plus the Peabody Express high-speed quad.",
+    "lifts": "The Peabody Express and Cannonball Express high-speed quads. The aerial tram closed in fall 2025 for a replacement expected to take about two years.",
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-11-22",
+      "closed": "2026-04-12",
+      "confidence": "confirmed",
+      "note": "Its earliest opening since 2019",
+      "best": "Best Feb–Mar"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Peabody Express and Cannonball Express"
   },
   {
     "name": "Owl's Head",
@@ -646,7 +791,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-05-02",
+      "confidence": "likely",
+      "note": "Regular season ran to about Apr 12, then a one-run Ski & Golf day on May 2",
+      "best": "Best Feb–Mar"
+    },
+    "slopeside": "Hôtel du Hibou, ski-in/ski-out suites in the main chalet",
+    "high_speed": true,
+    "high_speed_lifts": "Sommet and Panorama detachable quads"
   },
   {
     "name": "Mont Sutton",
@@ -666,7 +821,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 90,
       "note": "nonstop from LGA, JFK or EWR"
-    }
+    },
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-04-12",
+      "confidence": "confirmed",
+      "note": "564 cm of snow at the summit",
+      "best": "Best Feb–Mar"
+    },
+    "slopeside": "Ski-in/ski-out condo rentals near the base",
+    "high_speed": true,
+    "high_speed_lifts": "Chair #2 detachable quad"
   },
   {
     "name": "Loveland",
@@ -712,7 +877,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
         "value": "13,010′",
         "label": "summit"
       }
-    ]
+    ],
+    "season": {
+      "opened": "2025-11-08",
+      "closed": "2026-04-26",
+      "confidence": "confirmed",
+      "note": "A normal-length season in a poor year for much of the West",
+      "best": "Best Mar–Apr: it stays open late"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Chet's Dream"
   },
   {
     "name": "Mountain High",
@@ -735,7 +909,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 375,
       "note": "JetBlue nonstop from JFK"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-11-22",
+      "closed": "2026-03-15",
+      "confidence": "estimate",
+      "note": "Christmas storms closed it until Jan 10, and a record March heat wave ended the season around mid-March",
+      "best": "Best Jan–Feb, right after a storm"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Mountain High Express and Blue Ridge Express"
   },
   {
     "name": "Mt. Hood Meadows",
@@ -757,7 +940,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 375,
       "note": "nonstop"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-23",
+      "closed": "2026-04-12",
+      "confidence": "likely",
+      "note": "Its latest opening in 30 years, then an early close because of low snowpack",
+      "best": "Best Mar"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Mt. Hood Express six-pack and five high-speed quads"
   },
   {
     "name": "Tamarack",
@@ -785,7 +977,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 450,
       "note": "one connection, usually via Denver or Salt Lake City"
-    }
+    },
+    "season": {
+      "opened": "2025-12-22",
+      "closed": "2026-04-12",
+      "confidence": "likely",
+      "note": "A late start, with the upper mountain only at first",
+      "best": "Best Mar"
+    },
+    "slopeside": "The Lodge at Osprey Meadows and village rooms with ski-in/ski-out access",
+    "high_speed": true,
+    "high_speed_lifts": "Tamarack Express and Summit Express"
   },
   {
     "name": "Brundage",
@@ -812,7 +1014,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 450,
       "note": "one connection, usually via Denver or Salt Lake City"
-    }
+    },
+    "season": {
+      "opened": "2025-12-06",
+      "closed": "2026-04-12",
+      "confidence": "likely",
+      "note": "A sneak-peek weekend Dec 6–7, then full-time from Dec 21",
+      "best": "Best Mar"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Bluebird Express and Centennial Express"
   },
   {
     "name": "Snow King",
@@ -843,7 +1054,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 300,
       "note": "United nonstop from Newark in winter"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-12",
+      "closed": "2026-03-22",
+      "confidence": "likely",
+      "note": "A late, low-snow start, and it closed during a record March heat wave",
+      "best": "Best Feb–early Mar"
+    },
+    "slopeside": "Snow King Resort Hotel and condos at the base",
+    "high_speed": true,
+    "high_speed_lifts": "Snow King gondola"
   },
   {
     "name": "Bear Valley",
@@ -864,7 +1085,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 390,
       "note": "JetBlue nonstop from JFK"
-    }
+    },
+    "season": {
+      "opened": "2025-11-28",
+      "closed": "2026-03-29",
+      "confidence": "confirmed",
+      "note": "Limited terrain early on; one of the last Sierra resorts still open in a hot March",
+      "best": "Best Feb–Mar"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Mokelumne Express and Polar Express six-packs"
   },
   {
     "name": "Innsbruck SKI plus CITY",
@@ -910,7 +1140,16 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 465,
       "note": "nonstop from JFK or Newark"
-    }
+    },
+    "season": {
+      "opened": "2025-10-03",
+      "closed": "2026-05-10",
+      "confidence": "likely",
+      "note": "Those are the Stubai Glacier dates. Nordkette has no snowmaking and skied about Jan 10 to Apr 19; lower areas like Axamer Lizum ran about Nov 22 to Apr 12. A dry, low-snow winter in the eastern Alps",
+      "best": "Best around New Year's with the group, or Mar–Apr on the glacier"
+    },
+    "high_speed": true,
+    "high_speed_lifts": "Nordkette cable cars and the Patscherkofelbahn gondola"
   },
   {
     "name": "SkiWelt Wilder Kaiser–Brixental",
@@ -967,7 +1206,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 465,
       "note": "nonstop from JFK or Newark"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-06",
+      "closed": "2026-04-06",
+      "confidence": "likely",
+      "note": "Plus a preview weekend Nov 29–30. Mostly low terrain that relies on snowmaking",
+      "best": "Best New Year's–Jan, with the group"
+    },
+    "slopeside": "Ski-in hotels in Söll, Ellmau and Scheffau",
+    "high_speed": true,
+    "high_speed_lifts": "Hohe Salve gondola, Hartkaiserbahn and dozens more"
   },
   {
     "name": "Portes du Soleil",
@@ -989,7 +1238,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 455,
       "note": "nonstop from JFK"
-    }
+    },
+    "season": {
+      "opened": "2025-12-12",
+      "closed": "2026-04-19",
+      "confidence": "likely",
+      "note": "Those are Avoriaz's dates. The full linked area ran Dec 20 to Apr 6",
+      "best": "Best Mar"
+    },
+    "slopeside": "Avoriaz is car-free and fully ski-in/ski-out",
+    "high_speed": true,
+    "high_speed_lifts": "Prodains Express and Super Morzine gondola"
   },
   {
     "name": "Les Contamines",
@@ -1011,7 +1270,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 455,
       "note": "nonstop from JFK"
-    }
+    },
+    "season": {
+      "opened": "2025-12-13",
+      "closed": "2026-04-12",
+      "confidence": "likely",
+      "note": "Fully open from Dec 20",
+      "best": "Best Mar"
+    },
+    "slopeside": "Residences about 50 m from the Gorge gondola",
+    "high_speed": true,
+    "high_speed_lifts": "La Gorge and Le Signal gondolas"
   },
   {
     "name": "Les 7 Laux",
@@ -1033,7 +1302,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 600,
       "note": "one connection"
-    }
+    },
+    "season": {
+      "opened": "2025-12-20",
+      "closed": "2026-04-06",
+      "confidence": "estimate",
+      "note": "Scheduled dates; no confirmation found",
+      "best": "Best Mar"
+    },
+    "slopeside": "Les Granges des 7 Laux, ski-in/ski-out at Prapoutel",
+    "high_speed": true,
+    "high_speed_lifts": "Chamois detachable six-pack"
   },
   {
     "name": "Levi",
@@ -1071,7 +1350,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 690,
       "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-10-03",
+      "closed": "2026-05-10",
+      "confidence": "confirmed",
+      "note": "Opened on stored snow; 220 ski days. Polar night from mid-December to early January, but the slopes are lit",
+      "best": "Best Mar: longer days, with the aurora still out"
+    },
+    "slopeside": "Panorama Hotel, ski-in/ski-out above the Front Slope",
+    "high_speed": true,
+    "high_speed_lifts": "Levi Express gondola and the front-slope gondolas"
   },
   {
     "name": "Pyhä",
@@ -1101,7 +1390,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 690,
       "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-11-21",
+      "closed": "2026-05-03",
+      "confidence": "likely",
+      "note": "About 1–2 hours of sun in December",
+      "best": "Best Mar: longer days, with the aurora still out"
+    },
+    "slopeside": "Ski-Inn PyhäSuites at the foot of the slopes",
+    "high_speed": true,
+    "high_speed_lifts": "Pyhä Express six-pack"
   },
   {
     "name": "Ruka",
@@ -1137,7 +1436,17 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 690,
       "note": "about 8h nonstop JFK–Helsinki, then a short hop north"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-10-03",
+      "closed": "2026-05-03",
+      "confidence": "likely",
+      "note": "Opened on stored snow. Only 2–3 hours of daylight in midwinter, with lit slopes",
+      "best": "Best Mar: longer days, with the aurora still out"
+    },
+    "slopeside": "Ski-Inn RukaVillage, ski to the door",
+    "high_speed": true,
+    "high_speed_lifts": "Village-2-Valley gondola and Village Express"
   },
   {
     "name": "Geto Kogen",
@@ -1167,7 +1476,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 855,
       "note": "nonstop to Tokyo (HND or NRT), then the bullet train"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-05",
+      "closed": "2026-05-02",
+      "confidence": "likely",
+      "note": "Usually runs into Golden Week in early May; deepest powder Jan–Feb",
+      "best": "Best Jan–Feb for powder, or Apr for spring skiing"
+    }
   },
   {
     "name": "Aomori Spring",
@@ -1189,7 +1505,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 1020,
       "note": "nonstop to Tokyo, then a domestic hop"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-13",
+      "closed": "2026-04-05",
+      "confidence": "likely",
+      "note": "Best powder Jan–Feb",
+      "best": "Best Jan–Feb"
+    }
   },
   {
     "name": "Kamui Ski Links",
@@ -1211,6 +1534,13 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
     "flight": {
       "min": 1020,
       "note": "nonstop to Tokyo, then a domestic hop"
+    },
+    "season": {
+      "opened": "2025-12-13",
+      "closed": "2026-03-31",
+      "confidence": "confirmed",
+      "note": "Thin snow in places at opening",
+      "best": "Best Jan–Feb"
     }
   },
   {
@@ -1233,7 +1563,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 1020,
       "note": "nonstop to Tokyo, then a domestic hop"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-13",
+      "closed": "2026-03-22",
+      "confidence": "likely",
+      "note": "Night skiing runs through February",
+      "best": "Best Jan–Feb"
+    }
   },
   {
     "name": "Kandatsu",
@@ -1265,7 +1602,14 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
       "min": 855,
       "note": "nonstop to Tokyo (HND or NRT), then the bullet train"
     },
-    "night_skiing": true
+    "night_skiing": true,
+    "season": {
+      "opened": "2025-12-13",
+      "closed": "2026-04-07",
+      "confidence": "confirmed",
+      "note": "Fully open from Jan 24; closed 12 days early as the snow melted. Best mid-January to February",
+      "best": "Best mid-Jan–Feb"
+    }
   }
 ]
 </script>
@@ -1294,12 +1638,13 @@ footer p { margin: 0 0 6px; max-width: 60ch; }
   const $ = (id) => document.getElementById(id);
   const slider = $("max-drive"), out = $("drive-out");
   const flightSlider = $("max-flight"), flightOut = $("flight-out");
-  const state = { good: false, extras: false, domestic: false };
+  const state = { good: false, extras: false, domestic: false, fast: false };
   try {
     const saved = JSON.parse(localStorage.getItem("indy-view") || "{}");
     state.good = saved.good === true;
     state.extras = saved.extras === true;
     state.domestic = saved.domestic === true;
+    state.fast = saved.fast === true;
   } catch (e) {}
 
   const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -1318,6 +1663,9 @@ const beer = (r) => r.apres_level
   const farthest = Math.max(...resorts.map(drive));
   slider.max = Math.ceil(farthest / 15) * 15;
   slider.value = slider.max;
+  const longestFlight = Math.max(...resorts.map((r) => r.flight ? r.flight.min : 0));
+  flightSlider.max = Math.ceil(longestFlight / 30) * 30;
+  flightSlider.value = flightSlider.max;
 
   const badge = (r) => r.reservations_required
     ? '<span class="badge res">Reservation required</span>'
@@ -1326,9 +1674,25 @@ const beer = (r) => r.apres_level
   const nightText = (r) => r.fly_to
     ? "Night skiing, so no early alarm: you can land, check in and still ski under the lights."
     : "Night skiing, so no early alarm: leave the city after lunch and ski under the lights.";
-  const extraChips = (r) => (r.extras || r.night_skiing)
-    ? `<span class="extras">${r.night_skiing ? '<span class="extra night">🌙 Night skiing · no early alarm</span>' : ""}${(r.extras || []).map((e) => `<span class="extra">${e.icon} ${esc(e.label)}</span>`).join("")}</span>`
+  const extraChips = (r) => (r.extras || r.night_skiing || r.slopeside)
+    ? `<span class="extras">${r.slopeside ? '<span class="extra stay">🛏️ Slopeside lodging</span>' : ""}${r.night_skiing ? '<span class="extra night">🌙 Night skiing · no early alarm</span>' : ""}${(r.extras || []).map((e) => `<span class="extra">${e.icon} ${esc(e.label)}</span>`).join("")}</span>`
     : "";
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const day = (iso) => { const [y, m, d] = iso.split("-").map(Number); return `${MON[m - 1]} ${d}, ${y}`; };
+  const part = (iso) => { const [, m, dd] = iso.split("-").map(Number); return `${dd <= 10 ? "early" : dd <= 20 ? "mid" : "late"} ${MON[m - 1]}`; };
+  const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+  const when = (r) => {
+    const s = r.season;
+    if (!s || !s.opened || !s.closed) return "";
+    const approx = s.confidence === "estimate" ? "≈ " : "";
+    return `<p class="when"><b>Season</b>${approx}${cap(part(s.opened))} – ${part(s.closed)}${s.best ? `<span class="go">${esc(s.best)}</span>` : ""}</p>`;
+  };
+  const lastSeason = (r) => {
+    const s = r.season;
+    if (!s || !s.opened || !s.closed) return "";
+    const approx = s.confidence === "estimate" ? "≈ " : "";
+    return `<dt>Last season</dt><dd>${approx}Opened ${day(s.opened)}, closed ${day(s.closed)}${s.note ? `. ${esc(s.note)}` : ""}</dd>`;
+  };
   const flyLine = (r) => r.flight ? `<span class="fly">✈ ${hm(r.flight.min)}</span>` : "";
   const perks = (r) =>
     (r.lifts ? `<p class="apres"><b>Lifts</b>${esc(r.lifts)}</p>` : "") +
@@ -1341,7 +1705,10 @@ const beer = (r) => r.apres_level
     return `<dl class="details">
       ${r.highlights ? `<dt>Why</dt><dd><ul class="highlights">${r.highlights.map((h) => `<li>${esc(h)}</li>`).join("")}</ul></dd>` : ""}
       ${r.extras ? `<dt>Extras</dt><dd><ul class="extras-list">${r.extras.map((e) => `<li>${e.icon} ${esc(e.text)}</li>`).join("")}</ul></dd>` : ""}
+      ${lastSeason(r)}
       ${r.flight ? `<dt>Flight</dt><dd>About ${hm(r.flight.min)} from NYC, ${esc(r.flight.note)}</dd>` : ""}
+      ${r.slopeside ? `<dt>Stay</dt><dd>🛏️ ${esc(r.slopeside)}</dd>` : ""}
+      ${r.high_speed_lifts ? `<dt>Fast lifts</dt><dd>🚡 ${esc(r.high_speed_lifts)}</dd>` : ""}
       ${r.night_skiing ? `<dt>Night</dt><dd>${nightText(r)}</dd>` : ""}
       ${access}
       <dt>Trip</dt><dd>${esc(r.day_trip_or_weekend)}</dd>
@@ -1354,7 +1721,7 @@ const beer = (r) => r.apres_level
   function card(r) {
     const t = drive(r);
     const rank = `<span class="rank">#${r.rank}</span>`;
-    const meta = `<span class="meta">${badge(r)}<span class="chev" aria-hidden="true">▼</span></span>`;
+    const meta = `<span class="meta">${badge(r)}<span class="chev" aria-hidden="true"><span class="more">See more</span><span class="less">See less</span><span class="arrow">▼</span></span></span>`;
     if (r.featured) {
       return `<li><details class="card feature">
         <summary>
@@ -1363,6 +1730,7 @@ const beer = (r) => r.apres_level
           <span class="time">${hm(t)}<small>${from(r)}</small>${flyLine(r)}</span>
           ${r.stats ? `<span class="stats">${r.stats.map((s) => `<span class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></span>`).join("")}</span>` : ""}
           <p class="note">${esc(r.my_note)}</p>
+          ${when(r)}
           ${extraChips(r)}
           ${perks(r)}
           ${meta}
@@ -1375,6 +1743,7 @@ const beer = (r) => r.apres_level
         <span class="name">${rank}${esc(r.name)}${beer(r)}<span class="state">${esc(r.state)}</span></span>
         <span class="time" aria-label="${hm(t)} ${from(r)}">${hm(t)}<small>${from(r)}</small>${flyLine(r)}</span>
         <p class="note">${esc(r.my_note)}</p>
+        ${when(r)}
         ${extraChips(r)}
         ${perks(r)}
         ${meta}
@@ -1394,12 +1763,14 @@ const beer = (r) => r.apres_level
     $("good-apres").checked = state.good;
     $("has-extras").checked = state.extras;
     $("domestic").checked = state.domestic;
+    $("high-speed").checked = state.fast;
 
     const shown = resorts.filter((r) =>
       (anyDrive || drive(r) <= max) &&
       (anyFlight || !r.flight || r.flight.min <= maxF) &&
       (!state.good || r.apres_level) &&
       (!state.extras || r.extras) &&
+      (!state.fast || r.high_speed) &&
       (!state.domestic || !ABROAD.includes(r.tier)));
     const inTier = (t) => shown.filter((r) => r.tier === t);
     const visibleTiers = tiers.filter((t) => !(state.domestic && ABROAD.includes(t)));
@@ -1430,12 +1801,12 @@ const beer = (r) => r.apres_level
   $("has-extras").addEventListener("change", (e) => { state.extras = e.target.checked; render(); });
   $("good-apres").addEventListener("change", (e) => { state.good = e.target.checked; render(); });
   $("domestic").addEventListener("change", (e) => { state.domestic = e.target.checked; render(); });
+  $("high-speed").addEventListener("change", (e) => { state.fast = e.target.checked; render(); });
   $("filters").addEventListener("submit", (e) => e.preventDefault());
   slider.addEventListener("input", render);
   flightSlider.addEventListener("input", render);
   render();
 })();
 </script>
-
 </body>
 </html>
